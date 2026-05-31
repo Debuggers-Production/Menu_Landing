@@ -4,6 +4,7 @@ import {
   IoSearchOutline,
   IoPhonePortraitOutline,
   IoColorPaletteOutline,
+  IoLanguageOutline,
 } from 'react-icons/io5'
 import {
   MdOutlinePreview,
@@ -25,7 +26,8 @@ const features = [
   { icon: MdOutlineWavingHand, title: 'Welcome Messages', desc: 'Greet customers with personalized welcome screens.', span: '', color: 'from-primary to-secondary' },
   { icon: MdOutlineAnalytics, title: 'Analytics Dashboard', desc: 'Track scans, popular items, and customer behavior.', span: 'md:col-span-2', color: 'from-secondary to-accent' },
   { icon: IoPhonePortraitOutline, title: 'Mobile Optimized', desc: 'Perfect experience on every screen size.', span: '', color: 'from-accent to-primary' },
-  { icon: IoColorPaletteOutline, title: 'Beautiful Themes', desc: 'Choose from stunning templates that match your brand.', span: '', color: 'from-primary to-accent' },
+  { icon: IoLanguageOutline, title: 'Multi-Language Support', desc: 'Customers can translate your menu to their native language instantly.', span: 'md:col-span-2', color: 'from-primary to-secondary' },
+  { icon: IoColorPaletteOutline, title: 'Beautiful Themes', desc: 'Choose from stunning templates that match your brand.', span: 'md:col-span-2', color: 'from-secondary to-accent' },
 ]
 
 export default function Features() {

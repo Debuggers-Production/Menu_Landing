@@ -55,9 +55,9 @@ function App() {
       <main>
         <Hero />
         <Pricing />
+        <Features />
         <Problem />
         <HowItWorks />
-        <Features />
         <InteractiveShowcase />
         <LiveDemo />
         <Benefits />

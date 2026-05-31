@@ -19,7 +19,6 @@ function AnimatedCounter({ target, suffix, label, prefix = '', delay = 0 }: Coun
     if (!isInView) return
 
     const timer = setTimeout(() => {
-      let start = 0
       const duration = 2000
       const startTime = Date.now()
 

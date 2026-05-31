@@ -2,7 +2,7 @@ import { useMemo } from 'react'
 import { motion } from 'framer-motion'
 import SectionWrapper from '../components/SectionWrapper'
 
-function Particle({ index }: { index: number }) {
+function Particle() {
   const style = useMemo(() => ({
     left: `${Math.random() * 100}%`,
     top: `${Math.random() * 100}%`,
@@ -31,7 +31,7 @@ export default function FinalCTA() {
       {/* Particles */}
       <div className="absolute inset-0 overflow-hidden">
         {Array.from({ length: 30 }).map((_, i) => (
-          <Particle key={i} index={i} />
+          <Particle key={i} />
         ))}
       </div>
 

@@ -1,4 +1,3 @@
-import { motion } from 'framer-motion'
 import { IoQrCodeOutline, IoLogoTwitter, IoLogoInstagram, IoLogoLinkedin, IoLogoGithub } from 'react-icons/io5'
 
 const footerLinks = {

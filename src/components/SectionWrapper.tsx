@@ -1,4 +1,4 @@
-import { useRef, useEffect, type ReactNode } from 'react'
+import { useRef, type ReactNode } from 'react'
 import { motion, useInView } from 'framer-motion'
 
 interface SectionWrapperProps {

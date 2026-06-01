@@ -1,4 +1,5 @@
-import { IoQrCodeOutline, IoLogoTwitter, IoLogoInstagram, IoLogoLinkedin, IoLogoGithub } from 'react-icons/io5'
+import { IoLogoTwitter, IoLogoInstagram, IoLogoLinkedin, IoLogoGithub } from 'react-icons/io5'
+import logo from "../assets/menukit-logo.svg";
 
 const footerLinks = {
   Product: ['Features', 'Pricing', 'Demo', 'Templates', 'API'],
@@ -21,9 +22,9 @@ export default function Footer() {
         <div className="grid grid-cols-2 md:grid-cols-6 gap-8 mb-16">
           {/* Brand */}
           <div className="col-span-2">
-            <a href="#" className="flex items-center gap-2.5 mb-4">
-              <div className="w-10 h-10 rounded-xl bg-gradient-to-br from-primary to-secondary flex items-center justify-center">
-                <IoQrCodeOutline className="text-white text-xl" />
+            <a href="#" className="flex items-center mb-4">
+              <div className="w-12 h-12 flex items-center justify-center scale-110">
+                <img src={logo} alt="MenuKit-Logo" className="w-full h-full" />
               </div>
               <span className="text-xl font-display font-bold text-white">
                 Menu<span className="gradient-text">Kit</span>

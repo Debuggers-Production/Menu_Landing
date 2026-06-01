@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
 import { HiOutlineMenuAlt3, HiOutlineX } from 'react-icons/hi'
-import { IoQrCodeOutline } from 'react-icons/io5'
+import logo from "../assets/menukit-logo.svg";
 
 const navLinks = [
   { label: 'Features', href: '#features' },
@@ -35,9 +35,9 @@ export default function Navbar() {
         <div className="max-w-7xl mx-auto px-6 lg:px-8">
           <div className="flex items-center justify-between h-20">
             {/* Logo */}
-            <a href="#" className="flex items-center gap-2.5 group">
-              <div className="w-10 h-10 rounded-xl bg-gradient-to-br from-primary to-secondary flex items-center justify-center group-hover:shadow-lg group-hover:shadow-primary/25 transition-shadow duration-300">
-                <IoQrCodeOutline className="text-white text-xl" />
+            <a href="#" className="flex items-center  group">
+              <div className="w-12 h-12 flex items-center justify-center scale-110">
+                <img src={logo} alt="MenuKit-Logo" className="w-full h-full" />
               </div>
               <span className="text-xl font-display font-bold text-white">
                 Menu<span className="gradient-text">Kit</span>

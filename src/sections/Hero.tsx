@@ -138,6 +138,10 @@ export default function Hero() {
           <a href="https://menukit.debuggers.co.in" className="shimmer-btn px-8 py-4 text-lg font-semibold min-w-[200px] inline-block text-center">
             Start Free
           </a>
+          <a href="https://menukit.debuggers.co.in/discover" className="outline-btn px-8 py-4 text-lg font-semibold min-w-[200px] flex items-center justify-center gap-2" style={{ borderColor: 'rgba(249,115,22,0.5)', color: '#f97316' }}>
+            <IoRestaurantOutline className="text-xl" />
+            Explore Shops
+          </a>
           <button className="outline-btn px-8 py-4 text-lg font-semibold min-w-[200px] flex items-center justify-center gap-2">
             <HiOutlinePlay className="text-xl" />
             Watch Demo

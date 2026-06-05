@@ -5,6 +5,7 @@ import {
   IoPhonePortraitOutline,
   IoColorPaletteOutline,
   IoLanguageOutline,
+  IoMapOutline,
 } from 'react-icons/io5'
 import {
   MdOutlinePreview,
@@ -17,6 +18,7 @@ import {
 import SectionWrapper from '../components/SectionWrapper'
 
 const features = [
+  { icon: IoMapOutline, title: 'Global Store Discovery', desc: 'Allow hungry customers to find your restaurant on an interactive map and explore your best deals.', span: 'md:col-span-4 lg:col-span-2', color: 'from-accent to-secondary' },
   { icon: IoQrCodeOutline, title: 'QR Code Generation', desc: 'Generate unique, scannable QR codes for each table or location instantly.', span: 'md:col-span-2', color: 'from-primary to-secondary' },
   { icon: MdOutlinePreview, title: 'Live Menu Preview', desc: 'See real-time changes as you build your menu.', span: '', color: 'from-secondary to-accent' },
   { icon: MdOutlineUpdate, title: 'Unlimited Updates', desc: 'Change prices, items, and categories anytime.', span: '', color: 'from-accent to-primary' },

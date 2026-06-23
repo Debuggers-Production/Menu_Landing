@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://api.menukit.debuggers.co.in/api/v1/seo/sitemap.xml

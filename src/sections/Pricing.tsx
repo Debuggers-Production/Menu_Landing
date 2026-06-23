@@ -1,112 +1,449 @@
-import { useRef } from 'react'
+import { useState, useMemo, useRef } from 'react'
 import { motion, useInView } from 'framer-motion'
-import { IoCheckmarkCircle } from 'react-icons/io5'
+import { Check, ShoppingCart, Sparkles, Zap, PackageOpen, Award, Layers, ShieldCheck, ArrowRight, HelpCircle } from 'lucide-react';
 import SectionWrapper from '../components/SectionWrapper'
+
+function cn(...classes: (string | undefined | null | false)[]) {
+  return classes.filter(Boolean).join(' ');
+}
+
+interface Feature {
+  id: string;
+  name: string;
+  price: number;
+  description: string;
+  category: string;
+}
+
+const ADDONS: Feature[] = [
+  {
+    id: 'member-count',
+    name: 'New Member Count',
+    price: 100,
+    description: 'Track how many new members/customers join every month seamlessly.',
+    category: 'Relationship Marketing',
+  },
+  {
+    id: 'member-details',
+    name: 'New Member + Details',
+    price: 150,
+    description: 'Store and manage deep customer information along with member growth metrics.',
+    category: 'Relationship Marketing',
+  },
+  {
+    id: 'search-data',
+    name: 'Customer Search Data',
+    price: 60,
+    description: 'Access search analytics and real-time customer interest insights.',
+    category: 'Marketing',
+  },
+  {
+    id: 'custom-theme',
+    name: 'Custom Theme Studio',
+    price: 60,
+    description: 'Customize colors, logos, and custom branding of your digital menu.',
+    category: 'Branding',
+  },
+  {
+    id: 'analytics-advanced-filters',
+    name: 'Advanced Analytics Filters',
+    price: 50,
+    description: 'Unlock 7-day, 30-day, and Custom Date range filters for your dashboard.',
+    category: 'Analytics',
+  },
+  {
+    id: 'analytics-customer-insights',
+    name: 'Customer Insights Report',
+    price: 50,
+    description: 'Access detailed reports on customer views and repeat visits.',
+    category: 'Analytics',
+  },
+];
+
+const ALL_ACCESS_PRICE = 299;
 
 export default function Pricing() {
   const ref = useRef(null)
   const isInView = useInView(ref, { once: true, margin: '-50px' })
 
+  const [selectedFeatures, setSelectedFeatures] = useState<Set<string>>(new Set());
+  const [isAllAccess, setIsAllAccess] = useState(false);
+
+  const toggleFeature = (id: string) => {
+    if (isAllAccess) setIsAllAccess(false);
+
+    setSelectedFeatures((prev) => {
+      const newSet = new Set(prev);
+      
+      if (id === 'member-details') {
+        if (!newSet.has('member-details')) {
+          newSet.add('member-details');
+          newSet.delete('member-count');
+        } else {
+          newSet.delete('member-details');
+        }
+      } else if (id === 'member-count') {
+        if (!newSet.has('member-count')) {
+          newSet.add('member-count');
+          newSet.delete('member-details');
+        } else {
+          newSet.delete('member-count');
+        }
+      } else {
+        if (newSet.has(id)) {
+          newSet.delete(id);
+        } else {
+          newSet.add(id);
+        }
+      }
+
+      return newSet;
+    });
+  };
+
+  const handlePlanTypeChange = (type: 'custom' | 'all-access') => {
+    if (type === 'all-access') {
+      setIsAllAccess(true);
+      setSelectedFeatures(new Set());
+    } else {
+      setIsAllAccess(false);
+    }
+  };
+
+  const { total, activeItems } = useMemo(() => {
+    if (isAllAccess) {
+      return { total: ALL_ACCESS_PRICE, activeItems: [] };
+    }
+    
+    let sum = 0;
+    const items: Feature[] = [];
+    selectedFeatures.forEach((id) => {
+      const feature = ADDONS.find(a => a.id === id);
+      if (feature) {
+        sum += feature.price;
+        items.push(feature);
+      }
+    });
+    return { total: sum, activeItems: items };
+  }, [selectedFeatures, isAllAccess]);
+
   return (
-    <SectionWrapper id="pricing" className="bg-grid">
-      <div className="max-w-7xl mx-auto px-6">
-        {/* Section Header */}
-        <div className="text-center mb-16">
-          <motion.span
-            initial={{ opacity: 0, y: 10 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            className="inline-block px-4 py-1.5 rounded-full bg-primary/10 border border-primary/20 text-primary text-sm font-medium mb-6"
-          >
-            Special Offer
-          </motion.span>
-          <motion.h2
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ delay: 0.1 }}
-            className="text-4xl md:text-5xl lg:text-6xl font-display font-bold mb-6"
-          >
-            Don't Pay Like <span className="text-red-500 line-through decoration-red-500/50">Others</span>
-            <br />
-            <span className="gradient-text">It's Completely Free!</span>
-          </motion.h2>
-          <motion.p
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ delay: 0.2 }}
-            className="text-lg text-subtext max-w-2xl mx-auto"
-          >
-            Other platforms charge hundreds of dollars for a digital menu. We are giving it away for free to early adopters. Grab it now before we introduce paid plans!
-          </motion.p>
-        </div>
+    <SectionWrapper id="pricing" className="bg-[#0b0f19] relative">
+      {/* Background Decorative Ambient Gradients */}
+      <div className="absolute top-0 left-1/2 -translate-x-1/2 w-full max-w-7xl h-[500px] pointer-events-none overflow-hidden z-0 opacity-40 dark:opacity-70">
+        <div className="absolute -top-40 left-10 w-72 h-72 bg-primary/30 rounded-full blur-[120px]" />
+        <div className="absolute -top-20 right-10 w-80 h-80 bg-orange-500/20 rounded-full blur-[100px]" />
+      </div>
 
-        {/* Pricing Cards */}
-        <div ref={ref} className="grid md:grid-cols-2 gap-8 max-w-5xl mx-auto items-center">
+      <div className="relative max-w-5xl mx-auto px-4 pt-8 sm:px-6 lg:px-8 z-10" ref={ref}>
+        
+        {/* Luxury Header */}
+        <motion.div 
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          className="text-center mb-8 sm:mb-12"
+        >
+          <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-orange-950/40 border border-orange-900/40 text-primary text-[11px] font-bold uppercase tracking-wider mb-3">
+            <Sparkles size={12} className="animate-pulse" /> Add-On Marketplace
+          </div>
+          <h2 className="text-3xl sm:text-5xl font-black tracking-tight text-white mb-3">
+            Build Your <span className="bg-gradient-to-r from-primary via-orange-500 to-orange-500 bg-clip-text text-transparent">Custom Plan</span>
+          </h2>
+          <p className="text-slate-400 max-w-md mx-auto text-sm sm:text-base px-2">
+            Start with our powerful core system for free. Scale your dynamic business with precision modular updates.
+          </p>
+        </motion.div>
+
+        {/* Premium Native Segmented Switch */}
+        <motion.div 
+          initial={{ opacity: 0, y: 20 }}
+          animate={isInView ? { opacity: 1, y: 0 } : {}}
+          transition={{ duration: 0.5, delay: 0.1 }}
+          className="flex justify-center mb-8 px-1"
+        >
+          <div className="bg-[#131b2e] border border-slate-800/80 p-1 rounded-2xl flex w-full max-w-md shadow-inner backdrop-blur-md">
+            <button
+              onClick={() => handlePlanTypeChange('custom')}
+              className={cn(
+                "flex-1 flex items-center justify-center gap-2 py-3 px-3 rounded-xl text-xs sm:text-sm font-bold transition-all duration-300",
+                !isAllAccess 
+                  ? "bg-[#1e294b] text-white" 
+                  : "text-slate-400 hover:text-slate-200"
+              )}
+            >
+              <Layers size={14} className={!isAllAccess ? "text-primary" : ""} />
+              Modular Add-ons
+            </button>
+            <button
+              onClick={() => handlePlanTypeChange('all-access')}
+              className={cn(
+                "flex-1 flex items-center justify-center gap-2 py-3 px-3 rounded-xl text-xs sm:text-sm font-bold transition-all duration-300 relative",
+                isAllAccess 
+                  ? "bg-gradient-to-r from-primary to-orange-600 text-white shadow-lg shadow-primary/20" 
+                  : "text-slate-400 hover:text-slate-200"
+              )}
+            >
+              <Award size={14} className={isAllAccess ? "text-amber-300" : ""} />
+              All-Access Pack
+              <span className="absolute -top-1.5 right-1 bg-amber-500 text-[9px] text-white px-1.5 py-0.5 rounded-full font-black shadow-sm">
+                MAX
+              </span>
+            </button>
+          </div>
+        </motion.div>
+
+        {/* Core Layout Structure */}
+        <div className="grid grid-cols-1 lg:grid-cols-3 gap-6 items-start pb-12">
           
-          {/* Competitor / Old Way */}
-          <motion.div
-            initial={{ opacity: 0, x: -40 }}
-            animate={isInView ? { opacity: 1, x: 0 } : {}}
-            transition={{ duration: 0.6 }}
-            className="glass-card p-8 opacity-60 grayscale hover:grayscale-0 transition-all duration-300"
+          {/* Base Configuration Block */}
+          <motion.div 
+            initial={{ opacity: 0, y: 30 }}
+            animate={isInView ? { opacity: 1, y: 0 } : {}}
+            transition={{ duration: 0.5, delay: 0.2 }}
+            className="lg:col-span-1 space-y-4"
           >
-            <h3 className="text-xl font-display font-bold text-subtext mb-2">Other Solutions</h3>
-            <div className="flex items-baseline gap-2 mb-6">
-              <span className="text-4xl font-bold text-white/50">$99</span>
-              <span className="text-subtext">/month</span>
+            <div className="bg-gradient-to-b from-emerald-500/10 to-[#111827]/60 backdrop-blur-md rounded-2xl p-5 border-2 border-emerald-500/30 shadow-[0_0_30px_rgba(16,185,129,0.15)] relative overflow-hidden group">
+              <div className="absolute -right-6 -bottom-6 text-emerald-500/10 pointer-events-none transition-transform group-hover:scale-110 duration-500">
+                <PackageOpen size={90} />
+              </div>
+              <div className="flex items-center justify-between mb-3">
+                <h3 className="font-extrabold text-slate-200 text-xs tracking-wider uppercase">Included Free Bundle</h3>
+                <span className="text-[10px] bg-emerald-500 text-white font-black px-2.5 py-0.5 rounded-full shadow-sm shadow-emerald-500/30">100% FREE</span>
+              </div>
+              <div className="flex items-baseline gap-1 mb-3">
+                <span className="text-3xl font-black text-emerald-400">₹0</span>
+                <span className="text-xs text-slate-400 font-medium">/ forever</span>
+              </div>
+              <ul className="space-y-2 border-t border-emerald-500/20 pt-3">
+                {['Hotel Profile System', 'Dynamic QR Generation', 'Menu Core Dashboard', 'Basic Analytics', 'Unlimited Menus & Categories', 'Unlimited Discounts'].map((item, i) => (
+                  <li key={i} className="flex items-center text-slate-300 text-xs font-medium">
+                    <ShieldCheck size={14} className="text-emerald-500 mr-2 shrink-0" />
+                    {item}
+                  </li>
+                ))}
+              </ul>
             </div>
-            <ul className="space-y-4 mb-8">
-              {['Limited menu items', 'Basic templates', 'Setup fees included', 'Hidden charges'].map((item, i) => (
-                <li key={i} className="flex items-center gap-3 text-subtext">
-                  <span className="w-1.5 h-1.5 rounded-full bg-red-500/50" />
-                  {item}
-                </li>
-              ))}
-            </ul>
-            <div className="w-full py-3 rounded-xl border border-white/10 text-center text-subtext cursor-not-allowed">
-              Too Expensive
-            </div>
+
+            {/* Smart Banner for Mobile & Desktop Upsell */}
+            {!isAllAccess && (
+              <div className="bg-gradient-to-br from-[#121829] via-[#1a233d] to-[#111625] text-white rounded-2xl p-5 border border-primary/20 shadow-xl relative overflow-hidden group">
+                <div className="absolute top-0 right-0 w-32 h-32 bg-primary/10 rounded-full blur-xl" />
+                <h4 className="font-bold text-sm mb-1 flex items-center gap-1.5 text-orange-200">
+                  <Sparkles size={14} className="text-amber-400" /> Unlock True Efficiency
+                </h4>
+                <p className="text-xs text-slate-400 leading-relaxed mb-4">
+                  Consolidate every custom marketplace dynamic feature and priority updates inside one flat billing wrapper.
+                </p>
+                <button 
+                  onClick={() => handlePlanTypeChange('all-access')}
+                  className="w-full bg-primary hover:bg-orange-500 text-white py-2.5 rounded-xl text-xs font-bold transition-all flex items-center justify-center gap-1 shadow-md shadow-primary/10"
+                >
+                  Switch to All-Access <ArrowRight size={12} />
+                </button>
+              </div>
+            )}
           </motion.div>
 
-          {/* MenuKit Free Tier */}
-          <motion.div
-            initial={{ opacity: 0, x: 40 }}
-            animate={isInView ? { opacity: 1, x: 0 } : {}}
-            transition={{ duration: 0.6, delay: 0.2 }}
-            className="glass-card p-8 relative overflow-hidden animated-border orange-glow scale-105"
+          {/* Dynamic Content Switching Layer */}
+          <motion.div 
+            initial={{ opacity: 0, y: 30 }}
+            animate={isInView ? { opacity: 1, y: 0 } : {}}
+            transition={{ duration: 0.5, delay: 0.3 }}
+            className="lg:col-span-2"
           >
-            <div className="absolute top-4 right-4 px-3 py-1 rounded-full bg-primary/20 text-primary text-xs font-bold uppercase tracking-wider animate-pulse">
-              Limited Time
-            </div>
-            <h3 className="text-2xl font-display font-bold text-primary mb-2">MenuKit Early Access</h3>
-            <div className="flex items-baseline gap-2 mb-2">
-              <span className="text-5xl font-bold text-white">$0</span>
-              <span className="text-subtext">forever</span>
-            </div>
-            <p className="text-sm text-primary mb-6 font-medium">Grab it now before prices change!</p>
-            
-            <ul className="space-y-4 mb-8">
-              {[
-                'Unlimited menu items',
-                'All premium templates',
-                'Instant updates',
-                'Analytics dashboard',
-                'Zero setup fees'
-              ].map((item, i) => (
-                <li key={i} className="flex items-center gap-3 text-white">
-                  <IoCheckmarkCircle className="text-primary text-xl flex-shrink-0" />
-                  <span className="font-medium">{item}</span>
-                </li>
-              ))}
-            </ul>
-            <a href="https://menukit.debuggers.co.in" className="shimmer-btn w-full py-4 rounded-xl text-center font-bold text-lg block">
-              Claim Your Free Account Now
-            </a>
+            {isAllAccess ? (
+              /* All Access Plan Layout Panel */
+              <div className="bg-[#121826] border-2 border-primary rounded-3xl p-6 sm:p-8 shadow-xl shadow-primary/5 relative overflow-hidden group animate-in fade-in zoom-in-95 duration-200">
+                <div className="absolute -top-10 -right-10 w-40 h-40 bg-primary/10 rounded-full blur-2xl group-hover:bg-primary/20 transition-all duration-700" />
+                
+                <div className="flex flex-col sm:flex-row gap-5 sm:items-center justify-between relative z-10 pb-6 border-b border-slate-800/80">
+                  <div className="flex items-start gap-3.5">
+                    <div className="w-12 h-12 rounded-2xl bg-gradient-to-br from-primary to-orange-600 text-white flex items-center justify-center shadow-lg shadow-primary/20 shrink-0 mt-0.5">
+                      <Award size={22} />
+                    </div>
+                    <div>
+                      <h3 className="text-xl sm:text-2xl font-black text-white">All-Access Bundle</h3>
+                      <p className="text-xs sm:text-sm text-slate-400 mt-1 max-w-xs">
+                        Complete feature catalog package clearance with no operational volume bounds or rate capping tiers.
+                      </p>
+                    </div>
+                  </div>
+                  
+                  <div className="relative group self-center sm:self-auto shrink-0">
+                    <div className="absolute inset-0 bg-gradient-to-r from-primary to-orange-600 rounded-2xl blur-md opacity-30 group-hover:opacity-60 transition duration-500" />
+                    <div className="relative bg-[#182032] px-6 py-4 rounded-2xl border-2 border-primary/50 flex items-baseline gap-1 shadow-xl shadow-primary/20">
+                      <span className="text-4xl font-black bg-gradient-to-r from-primary to-orange-600 bg-clip-text text-transparent">₹{ALL_ACCESS_PRICE}</span>
+                      <span className="text-xs text-slate-400 font-bold">/mo</span>
+                    </div>
+                  </div>
+                </div>
+
+                <div className="mt-6">
+                  <span className="text-[11px] font-bold text-primary uppercase tracking-widest block mb-3">Everything Included:</span>
+                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-2.5">
+                    {ADDONS.map((addon) => (
+                      <div key={addon.id} className="flex items-center gap-2.5 bg-[#171f30]/60 p-3 rounded-xl border border-slate-800/40">
+                        <div className="w-4 h-4 rounded-full bg-emerald-500 text-white flex items-center justify-center shrink-0 shadow-sm">
+                          <Check size={10} strokeWidth={3} />
+                        </div>
+                        <span className="font-semibold text-xs text-slate-300 truncate">{addon.name}</span>
+                      </div>
+                    ))}
+                  </div>
+                </div>
+              </div>
+            ) : (
+              /* Custom Feature Modular Marketplace Grid */
+              <div className="space-y-3 animate-in fade-in zoom-in-95 duration-200">
+                <div className="flex items-center justify-between text-slate-200 font-bold text-xs uppercase tracking-wider px-1">
+                  <span className="flex items-center gap-1.5"><Zap size={14} className="text-primary" /> Mix & Match Core Modules</span>
+                  <span className="text-slate-400 text-[11px] font-medium hidden sm:inline">Tap to choose</span>
+                </div>
+                
+                <div>
+                  {Object.entries(
+                    ADDONS.reduce((acc, feature) => {
+                      const cat = feature.category || 'Other';
+                      if (!acc[cat]) acc[cat] = [];
+                      acc[cat].push(feature);
+                      return acc;
+                    }, {} as Record<string, typeof ADDONS>)
+                  ).map(([category, features]) => (
+                    <div key={category} className="mb-6 last:mb-0">
+                      <h3 className="text-xs font-bold text-slate-200 uppercase tracking-wider mb-3 px-1 border-b border-slate-800/50 pb-2 flex items-center gap-2">
+                        <Layers size={14} className="text-primary" />
+                        {category}
+                      </h3>
+                      <div className="grid grid-cols-1 sm:grid-cols-2 gap-3.5">
+                        {features.map((feature) => {
+                          const isSelected = selectedFeatures.has(feature.id);
+                          return (
+                            <div 
+                              key={feature.id}
+                              onClick={() => toggleFeature(feature.id)}
+                              className={cn(
+                                "bg-[#111726] border rounded-2xl p-4 sm:p-5 transition-all duration-300 flex flex-col justify-between cursor-pointer select-none relative active:scale-[0.98] tap-highlight-transparent group",
+                                isSelected 
+                                  ? "border-primary shadow-md ring-1 ring-primary/20" 
+                                  : "border-slate-800/80 hover:border-slate-700 shadow-sm"
+                              )}
+                            >
+                              {/* Selected Indicator Glow Line */}
+                              {isSelected && <div className="absolute top-0 left-6 right-6 h-[2px] bg-gradient-to-r from-transparent via-primary to-transparent shadow-md" />}
+
+                              <div>
+                                <div className="flex justify-between items-start gap-3 mb-2">
+                                  <div>
+                                    <h4 className="font-extrabold text-white text-sm sm:text-base leading-snug mt-1.5 transition-colors group-hover:text-primary">
+                                      {feature.name}
+                                    </h4>
+                                  </div>
+                                  
+                                  {/* Tap Check Target Element */}
+                                  <div className={cn(
+                                    "w-5 h-5 rounded-full border flex items-center justify-center shrink-0 transition-all duration-300 shadow-inner mt-0.5",
+                                    isSelected 
+                                      ? "bg-primary border-primary text-white scale-110 shadow-primary/20" 
+                                      : "border-slate-700 bg-[#182032]"
+                                  )}>
+                                    {isSelected && <Check size={11} strokeWidth={3} />}
+                                  </div>
+                                </div>
+                                
+                                <p className="text-xs text-slate-400 leading-normal mb-4">
+                                  {feature.description}
+                                </p>
+                              </div>
+
+                              <div className="pt-3 border-t border-slate-800/40 flex items-center justify-between">
+                                <span className="text-[10px] font-bold text-slate-400 uppercase tracking-wider flex items-center gap-1">
+                                  <HelpCircle size={11} /> Multi-use
+                                </span>
+                                <div className="text-right">
+                                  <span className="font-black text-white text-sm sm:text-base">₹{feature.price}</span>
+                                  <span className="text-[10px] text-slate-400 font-bold">/mo</span>
+                                </div>
+                              </div>
+                            </div>
+                          );
+                        })}
+                      </div>
+                    </div>
+                  ))}
+                </div>
+              </div>
+            )}
           </motion.div>
 
         </div>
+
+        {/* Inline Mobile-First Safe Sticky Billing Bar (Adapted for Landing Page) */}
+        <motion.div 
+          initial={{ opacity: 0, y: 20 }}
+          animate={isInView ? { opacity: 1, y: 0 } : {}}
+          transition={{ duration: 0.5, delay: 0.4 }}
+          className="mt-6 mb-12 bg-[#0b0f19]/80 backdrop-blur-xl border border-slate-800/80 rounded-3xl shadow-[0_10px_40px_rgba(0,0,0,0.4)] z-50 p-6 transition-transform duration-300 relative overflow-hidden"
+        >
+          {/* Subtle glow behind calculator */}
+          <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-full h-full bg-primary/5 blur-[100px] pointer-events-none rounded-full" />
+          
+          <div className="max-w-4xl mx-auto flex flex-col md:flex-row items-center justify-between gap-6 relative z-10">
+            
+            {/* Meta Pricing Details Layer */}
+            <div className="flex items-center gap-4 w-full md:w-auto justify-between md:justify-start">
+              <div className="flex items-center gap-4">
+                <div className="w-12 h-12 rounded-xl bg-[#131b2e] flex items-center justify-center text-slate-400 border border-slate-700/20 shrink-0">
+                  <ShoppingCart size={20} />
+                </div>
+                <div className="min-w-0">
+                  <span className="text-[11px] text-slate-400 font-bold uppercase tracking-widest block leading-none mb-1.5">Your Setup</span>
+                  <div className="flex items-center gap-2 text-sm font-bold text-slate-200">
+                    <span>Core (₹0)</span>
+                    <span className="text-slate-700">•</span>
+                    {isAllAccess ? (
+                      <span className="text-primary font-extrabold text-xs bg-primary/10 px-2 py-0.5 rounded-md">All-Access Pack</span>
+                    ) : (
+                      <span className="text-slate-400 font-semibold text-xs">
+                        {activeItems.length === 0 ? 'No add-ons' : `${activeItems.length} active module${activeItems.length !== 1 ? 's' : ''}`}
+                      </span>
+                    )}
+                  </div>
+                </div>
+              </div>
+
+              {/* Total display localized inside mobile line alignment split */}
+              <div className="text-right md:hidden">
+                <span className="text-[10px] text-slate-400 font-bold uppercase tracking-widest block mb-1">Total</span>
+                <div className="flex items-baseline justify-end gap-1">
+                  <span className="text-3xl font-black text-white tracking-tight">₹{total}</span>
+                  <span className="text-xs font-bold text-slate-400">/mo</span>
+                </div>
+              </div>
+            </div>
+
+            {/* Total display & Interactive Checkout Call-out Button Bundle */}
+            <div className="flex items-center justify-between md:justify-end gap-8 w-full md:w-auto pt-6 border-t border-slate-800 md:border-0 md:pt-0">
+              {/* Main Desktop Total Wrapper */}
+              <div className="text-right hidden md:block">
+                <span className="text-[11px] text-slate-400 font-bold uppercase tracking-widest block mb-1">Total Investment</span>
+                <div className="flex items-baseline justify-end gap-1">
+                  <span className="text-4xl font-black text-white tracking-tight">₹{total}</span>
+                  <span className="text-sm font-bold text-slate-400">/mo</span>
+                </div>
+              </div>
+              
+              <a
+                href="https://menukit.debuggers.co.in/login"
+                className="w-full md:w-auto shimmer-btn px-10 py-4 rounded-xl font-bold shadow-lg shadow-primary/20 transition-all duration-200 flex items-center justify-center min-w-[180px] text-base hover:scale-105 active:scale-[0.97]"
+              >
+                Get Started Now
+              </a>
+            </div>
+
+          </div>
+        </motion.div>
+
       </div>
     </SectionWrapper>
   )

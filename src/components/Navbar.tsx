@@ -1,6 +1,7 @@
 import { useState, useEffect } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
 import { HiOutlineMenuAlt3, HiOutlineX } from 'react-icons/hi'
+import { Link } from 'react-router-dom'
 import logo from "../assets/menukit-logo.svg";
 
 const navLinks = [
@@ -8,6 +9,7 @@ const navLinks = [
   { label: 'How It Works', href: '#how-it-works' },
   { label: 'Demo', href: '#demo' },
   { label: 'Pricing', href: '#pricing' },
+  { label: 'Learn', href: '/docs', isRoute: true },
 ]
 
 export default function Navbar() {
@@ -47,24 +49,28 @@ export default function Navbar() {
             {/* Desktop Nav */}
             <div className="hidden md:flex items-center gap-1">
               {navLinks.map((link) => (
-                <a
-                  key={link.label}
-                  href={link.href}
-                  className="px-4 py-2 text-sm text-subtext hover:text-white transition-colors duration-200 rounded-lg hover:bg-white/5"
-                >
-                  {link.label}
-                </a>
+                link.isRoute ? (
+                  <Link
+                    key={link.label}
+                    to={link.href}
+                    className="px-4 py-1.5 text-sm font-bold text-primary hover:text-white transition-colors duration-200 rounded-lg bg-primary/10 hover:bg-primary border border-primary/20"
+                  >
+                    {link.label}
+                  </Link>
+                ) : (
+                  <a
+                    key={link.label}
+                    href={link.href}
+                    className="px-4 py-2 text-sm text-subtext hover:text-white transition-colors duration-200 rounded-lg hover:bg-white/5"
+                  >
+                    {link.label}
+                  </a>
+                )
               ))}
             </div>
 
             {/* Desktop CTA */}
             <div className="hidden md:flex items-center gap-3">
-              <a
-                href="https://menukit.debuggers.co.in"
-                className="text-sm text-subtext hover:text-white transition-colors duration-200 px-4 py-2"
-              >
-                Sign In
-              </a>
               <a href="https://menukit.debuggers.co.in" className="shimmer-btn px-5 py-2.5 text-sm inline-block">
                 Start Free
               </a>
@@ -94,21 +100,29 @@ export default function Navbar() {
           >
             <div className="flex flex-col gap-2">
               {navLinks.map((link) => (
-                <a
-                  key={link.label}
-                  href={link.href}
-                  onClick={() => setMobileOpen(false)}
-                  className="text-lg text-subtext hover:text-white transition-colors py-3 border-b border-white/5"
-                >
-                  {link.label}
-                </a>
+                link.isRoute ? (
+                  <Link
+                    key={link.label}
+                    to={link.href}
+                    onClick={() => setMobileOpen(false)}
+                    className="text-lg font-bold text-primary hover:text-orange-400 transition-colors py-3 border-b border-white/5"
+                  >
+                    {link.label}
+                  </Link>
+                ) : (
+                  <a
+                    key={link.label}
+                    href={link.href}
+                    onClick={() => setMobileOpen(false)}
+                    className="text-lg text-subtext hover:text-white transition-colors py-3 border-b border-white/5"
+                  >
+                    {link.label}
+                  </a>
+                )
               ))}
               <div className="mt-6 flex flex-col gap-3">
                 <a href="https://menukit.debuggers.co.in" className="shimmer-btn px-6 py-3 text-base w-full text-center">
                   Start Free
-                </a>
-                <a href="https://menukit.debuggers.co.in" className="outline-btn px-6 py-3 text-base w-full text-center">
-                  Sign In
                 </a>
               </div>
             </div>

@@ -1,73 +1,47 @@
-import { useEffect, useRef } from 'react'
-import Lenis from 'lenis'
-import { gsap } from 'gsap'
-import { ScrollTrigger } from 'gsap/ScrollTrigger'
-import Navbar from './components/Navbar'
-import Hero from './sections/Hero'
-import Problem from './sections/Problem'
-import HowItWorks from './sections/HowItWorks'
-import Features from './sections/Features'
-import InteractiveShowcase from './sections/InteractiveShowcase'
-import LiveDemo from './sections/LiveDemo'
-import Benefits from './sections/Benefits'
-import Testimonials from './sections/Testimonials'
-import Pricing from './sections/Pricing'
-import FAQ from './sections/FAQ'
-import FinalCTA from './sections/FinalCTA'
-import Footer from './sections/Footer'
-import MouseSpotlight from './components/MouseSpotlight'
-
-gsap.registerPlugin(ScrollTrigger)
+import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom';
+import { LandingPage } from './pages/LandingPage';
+import { DocsLayout } from './layouts/DocsLayout';
+import { DocsIndexPage } from './pages/docs/DocsIndexPage';
+import { CustomerExperienceArticle } from './pages/docs/CustomerExperienceArticle';
+import { ExploreLayout } from './layouts/ExploreLayout';
+import { ExplorePage } from './pages/explore/ExplorePage';
+import { StorePage } from './pages/explore/StorePage';
+import { HelmetProvider } from 'react-helmet-async';
 
 function App() {
-  const lenisRef = useRef<Lenis | null>(null)
-
-  useEffect(() => {
-    const lenis = new Lenis({
-      duration: 1.2,
-      easing: (t: number) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
-      smoothWheel: true,
-    })
-    lenisRef.current = lenis
-
-    function raf(time: number) {
-      lenis.raf(time)
-      requestAnimationFrame(raf)
-    }
-    requestAnimationFrame(raf)
-
-    // Sync Lenis with GSAP ScrollTrigger
-    lenis.on('scroll', ScrollTrigger.update)
-    gsap.ticker.add((time) => {
-      lenis.raf(time * 1000)
-    })
-    gsap.ticker.lagSmoothing(0)
-
-    return () => {
-      lenis.destroy()
-    }
-  }, [])
-
   return (
-    <div className="relative min-h-screen bg-bg overflow-hidden">
-      <MouseSpotlight />
-      <Navbar />
-      <main>
-        <Hero />
-        <Pricing />
-        <Features />
-        <Problem />
-        <HowItWorks />
-        <InteractiveShowcase />
-        <LiveDemo />
-        <Benefits />
-        <Testimonials />
-        <FAQ />
-        <FinalCTA />
-      </main>
-      <Footer />
-    </div>
-  )
+    <HelmetProvider>
+      <BrowserRouter basename="/landing">
+        <Routes>
+        <Route path="/" element={<LandingPage />} />
+        
+        <Route path="/docs" element={<DocsLayout />}>
+          <Route index element={<DocsIndexPage />} />
+          <Route path="restaurant-customer-experience" element={<CustomerExperienceArticle />} />
+          {/* Catch-all for other requested docs routes to point to the index or main article for now */}
+          <Route path="restaurant-menu-problems" element={<Navigate to="/docs/restaurant-customer-experience" replace />} />
+          <Route path="customer-retention-for-restaurants" element={<Navigate to="/docs/restaurant-customer-experience" replace />} />
+          <Route path="why-restaurants-lose-customers" element={<Navigate to="/docs/restaurant-customer-experience" replace />} />
+          <Route path="digital-menu-guide" element={<Navigate to="/docs/restaurant-customer-experience" replace />} />
+          <Route path="restaurant-growth-guide" element={<Navigate to="/docs/restaurant-customer-experience" replace />} />
+          <Route path="qr-menu-benefits" element={<Navigate to="/docs/restaurant-customer-experience" replace />} />
+          <Route path="restaurant-feedback-management" element={<Navigate to="/docs/restaurant-customer-experience" replace />} />
+          <Route path="*" element={<Navigate to="/docs" replace />} />
+        </Route>
+
+        {/* Explore and Store Routes */}
+        <Route element={<ExploreLayout />}>
+          <Route path="/explore" element={<ExplorePage />} />
+          <Route path="/explore/:city" element={<ExplorePage />} />
+          <Route path="/explore/:city/:category" element={<ExplorePage />} />
+          <Route path="/store/:slug" element={<StorePage />} />
+        </Route>
+
+        <Route path="*" element={<Navigate to="/" replace />} />
+      </Routes>
+    </BrowserRouter>
+    </HelmetProvider>
+  );
 }
 
-export default App
+export default App;

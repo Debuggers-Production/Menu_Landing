@@ -53,7 +53,7 @@ export function StorePage() {
   const [loading, setLoading] = useState(true);
 
   const API_URL = import.meta.env.VITE_API_URL || 'http://localhost:8002/api/v1';
-  const MAIN_APP_URL = import.meta.env.VITE_MAIN_APP_URL || 'https://menukit.debuggers.co.in';
+  const MAIN_APP_URL = import.meta.env.VITE_MAIN_APP_URL || 'http://localhost:5173';
   const discoverLink = `${MAIN_APP_URL}/discover/stores`;
 
   useEffect(() => {
@@ -294,7 +294,7 @@ export function StorePage() {
                   <div className="bg-slate-50 p-2.5 rounded-xl shrink-0"><Globe size={20} className="text-primary" /></div>
                   <div>
                     <div className="font-bold text-slate-900">Share Link</div>
-                    <div className="text-sm text-primary hover:underline cursor-pointer mt-0.5 break-all">{MAIN_APP_URL.replace('https://', '')}/store/{shop.slug}</div>
+                    <div className="text-sm text-primary hover:underline cursor-pointer mt-0.5 break-all">{MAIN_APP_URL.replace(/^https?:\/\//, '')}/store/{shop.slug}</div>
                   </div>
                 </div>
               </div>

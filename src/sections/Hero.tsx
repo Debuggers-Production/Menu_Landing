@@ -135,10 +135,10 @@ export default function Hero() {
           transition={{ delay: 1.5, duration: 0.8 }}
           className="flex flex-col sm:flex-row items-center justify-center gap-4"
         >
-          <a href="https://menukit.debuggers.co.in" className="shimmer-btn px-8 py-4 text-lg font-semibold min-w-[200px] inline-block text-center">
+          <a href={import.meta.env.VITE_MAIN_APP_URL || 'http://localhost:5173'} className="shimmer-btn px-8 py-4 text-lg font-semibold min-w-[200px] inline-block text-center">
             Start Free
           </a>
-          <a href="https://menukit.debuggers.co.in/discover" className="outline-btn px-8 py-4 text-lg font-semibold min-w-[200px] flex items-center justify-center gap-2" style={{ borderColor: 'rgba(249,115,22,0.5)', color: '#f97316' }}>
+          <a href={`${import.meta.env.VITE_MAIN_APP_URL || 'http://localhost:5173'}/discover`} className="outline-btn px-8 py-4 text-lg font-semibold min-w-[200px] flex items-center justify-center gap-2" style={{ borderColor: 'rgba(249,115,22,0.5)', color: '#f97316' }}>
             <IoRestaurantOutline className="text-xl" />
             Explore Shops
           </a>

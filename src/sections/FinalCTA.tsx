@@ -68,7 +68,7 @@ export default function FinalCTA() {
 
           <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
             <motion.a
-              href="https://menukit.debuggers.co.in"
+              href={import.meta.env.VITE_MAIN_APP_URL || 'http://localhost:5173'}
               whileHover={{ scale: 1.05 }}
               whileTap={{ scale: 0.98 }}
               className="shimmer-btn px-10 py-5 text-lg font-semibold min-w-[220px] inline-block"
@@ -76,7 +76,7 @@ export default function FinalCTA() {
               Start Free →
             </motion.a>
             <motion.a
-              href="https://menukit.debuggers.co.in"
+              href={import.meta.env.VITE_MAIN_APP_URL || 'http://localhost:5173'}
               whileHover={{ scale: 1.05 }}
               whileTap={{ scale: 0.98 }}
               className="outline-btn px-10 py-5 text-lg font-semibold min-w-[220px] inline-block"

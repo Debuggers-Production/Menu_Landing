@@ -434,7 +434,7 @@ export default function Pricing() {
               </div>
               
               <a
-                href="https://menukit.debuggers.co.in/login"
+                href={`${import.meta.env.VITE_MAIN_APP_URL || 'http://localhost:5173'}/login`}
                 className="w-full md:w-auto shimmer-btn px-10 py-4 rounded-xl font-bold shadow-lg shadow-primary/20 transition-all duration-200 flex items-center justify-center min-w-[180px] text-base hover:scale-105 active:scale-[0.97]"
               >
                 Get Started Now

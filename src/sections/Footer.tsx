@@ -26,11 +26,11 @@ export default function Footer() {
               <div className="w-12 h-12 flex items-center justify-center scale-110">
                 <img src={logo} alt="MenuKit-Logo" className="w-full h-full" />
               </div>
-              <span className="text-xl font-display font-bold text-white">
+              <span className="text-xl font-display font-bold text-slate-900">
                 Menu<span className="gradient-text">Kit</span>
               </span>
             </a>
-            <p className="text-sm text-subtext leading-relaxed mb-6 max-w-xs">
+            <p className="text-sm text-slate-500 leading-relaxed mb-6 max-w-xs">
               Transform your restaurant menu into a beautiful digital experience. QR-powered, instant updates, zero hassle.
             </p>
             <div className="flex gap-3">
@@ -39,7 +39,7 @@ export default function Footer() {
                   key={social.label}
                   href={social.href}
                   aria-label={social.label}
-                  className="w-10 h-10 rounded-xl bg-white/5 flex items-center justify-center text-subtext hover:text-primary hover:bg-primary/10 transition-all duration-200"
+                  className="w-10 h-10 rounded-xl bg-white/5 flex items-center justify-center text-slate-500 hover:text-primary hover:bg-primary/10 transition-all duration-200"
                 >
                   <social.icon className="text-lg" />
                 </a>
@@ -50,13 +50,13 @@ export default function Footer() {
           {/* Links */}
           {Object.entries(footerLinks).map(([category, links]) => (
             <div key={category}>
-              <h4 className="text-sm font-display font-semibold text-white mb-4">{category}</h4>
+              <h4 className="text-sm font-display font-semibold text-slate-900 mb-4">{category}</h4>
               <ul className="space-y-2.5">
                 {links.map((link) => (
                   <li key={link}>
                     <a
                       href="#"
-                      className="text-sm text-subtext hover:text-white transition-colors duration-200"
+                      className="text-sm text-slate-500 hover:text-slate-900 transition-colors duration-200"
                     >
                       {link}
                     </a>
@@ -69,14 +69,14 @@ export default function Footer() {
 
         {/* Bottom Bar */}
         <div className="pt-8 border-t border-white/5 flex flex-col md:flex-row items-center justify-between gap-4">
-          <p className="text-sm text-subtext">
-            © {new Date().getFullYear()} MenuKit. A product by <a href="https://debuggers.co.in" target="_blank" rel="noopener noreferrer" className="text-white hover:text-primary transition-colors font-medium">Debuggers</a>. All rights reserved.
+          <p className="text-sm text-slate-500">
+            © {new Date().getFullYear()} MenuKit. A product by <a href="https://debuggers.co.in" target="_blank" rel="noopener noreferrer" className="text-slate-900 hover:text-primary transition-colors font-medium">Debuggers</a>. All rights reserved.
           </p>
           <div className="flex items-center gap-6">
-            <a href="#" className="text-sm text-subtext hover:text-white transition-colors">
+            <a href="#" className="text-sm text-slate-500 hover:text-slate-900 transition-colors">
               Privacy Policy
             </a>
-            <a href="#" className="text-sm text-subtext hover:text-white transition-colors">
+            <a href="#" className="text-sm text-slate-500 hover:text-slate-900 transition-colors">
               Terms of Service
             </a>
           </div>

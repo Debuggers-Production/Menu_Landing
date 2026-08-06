@@ -30,7 +30,7 @@ export default function Navbar() {
         transition={{ duration: 0.8, ease: [0.22, 1, 0.36, 1] }}
         className={`fixed top-0 left-0 right-0 z-50 transition-all duration-500 ${
           scrolled
-            ? 'bg-bg/80 backdrop-blur-xl border-b border-white/5'
+            ? 'bg-whiteg/80 backdrop-blur-xl border-b border-white/5'
             : 'bg-transparent'
         }`}
       >
@@ -41,7 +41,7 @@ export default function Navbar() {
               <div className="w-12 h-12 flex items-center justify-center scale-110">
                 <img src={logo} alt="MenuKit-Logo" className="w-full h-full" />
               </div>
-              <span className="text-xl font-display font-bold text-white">
+              <span className="text-xl font-display font-bold text-slate-900">
                 Menu<span className="gradient-text">Kit</span>
               </span>
             </a>
@@ -53,7 +53,7 @@ export default function Navbar() {
                   <Link
                     key={link.label}
                     to={link.href}
-                    className="px-4 py-1.5 text-sm font-bold text-primary hover:text-white transition-colors duration-200 rounded-lg bg-primary/10 hover:bg-primary border border-primary/20"
+                    className="px-4 py-1.5 text-sm font-bold text-primary hover:text-slate-900 transition-colors duration-200 rounded-lg bg-primary/10 hover:bg-primary border border-primary/20"
                   >
                     {link.label}
                   </Link>
@@ -61,7 +61,7 @@ export default function Navbar() {
                   <a
                     key={link.label}
                     href={link.href}
-                    className="px-4 py-2 text-sm text-subtext hover:text-white transition-colors duration-200 rounded-lg hover:bg-white/5"
+                    className="px-4 py-2 text-sm text-slate-500 hover:text-slate-900 transition-colors duration-200 rounded-lg hover:bg-white/5"
                   >
                     {link.label}
                   </a>
@@ -79,7 +79,7 @@ export default function Navbar() {
             {/* Mobile Menu Toggle */}
             <button
               onClick={() => setMobileOpen(!mobileOpen)}
-              className="md:hidden text-white p-2"
+              className="md:hidden text-slate-900 p-2"
               aria-label="Toggle navigation menu"
             >
               {mobileOpen ? <HiOutlineX size={24} /> : <HiOutlineMenuAlt3 size={24} />}
@@ -96,7 +96,7 @@ export default function Navbar() {
             animate={{ opacity: 1, y: 0 }}
             exit={{ opacity: 0, y: -20 }}
             transition={{ duration: 0.3 }}
-            className="fixed inset-0 z-40 bg-bg/95 backdrop-blur-xl pt-24 px-6 md:hidden"
+            className="fixed inset-0 z-40 bg-whiteg/95 backdrop-blur-xl pt-24 px-6 md:hidden"
           >
             <div className="flex flex-col gap-2">
               {navLinks.map((link) => (
@@ -114,7 +114,7 @@ export default function Navbar() {
                     key={link.label}
                     href={link.href}
                     onClick={() => setMobileOpen(false)}
-                    className="text-lg text-subtext hover:text-white transition-colors py-3 border-b border-white/5"
+                    className="text-lg text-slate-500 hover:text-slate-900 transition-colors py-3 border-b border-white/5"
                   >
                     {link.label}
                   </a>

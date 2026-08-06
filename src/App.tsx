@@ -8,6 +8,11 @@ import { ExplorePage } from './pages/explore/ExplorePage';
 import { StorePage } from './pages/explore/StorePage';
 import { HelmetProvider } from 'react-helmet-async';
 
+import { RestaurantMenuProblemsArticle } from './pages/docs/RestaurantMenuProblemsArticle';
+import { CustomerRetentionArticle } from './pages/docs/CustomerRetentionArticle';
+import { DigitalMenuGuideArticle } from './pages/docs/DigitalMenuGuideArticle';
+import { QrMenuBenefitsArticle } from './pages/docs/QrMenuBenefitsArticle';
+import { FeedbackManagementArticle } from './pages/docs/FeedbackManagementArticle';
 function App() {
   return (
     <HelmetProvider>
@@ -18,14 +23,13 @@ function App() {
         <Route path="/docs" element={<DocsLayout />}>
           <Route index element={<DocsIndexPage />} />
           <Route path="restaurant-customer-experience" element={<CustomerExperienceArticle />} />
-          {/* Catch-all for other requested docs routes to point to the index or main article for now */}
-          <Route path="restaurant-menu-problems" element={<Navigate to="/docs/restaurant-customer-experience" replace />} />
-          <Route path="customer-retention-for-restaurants" element={<Navigate to="/docs/restaurant-customer-experience" replace />} />
-          <Route path="why-restaurants-lose-customers" element={<Navigate to="/docs/restaurant-customer-experience" replace />} />
-          <Route path="digital-menu-guide" element={<Navigate to="/docs/restaurant-customer-experience" replace />} />
-          <Route path="restaurant-growth-guide" element={<Navigate to="/docs/restaurant-customer-experience" replace />} />
-          <Route path="qr-menu-benefits" element={<Navigate to="/docs/restaurant-customer-experience" replace />} />
-          <Route path="restaurant-feedback-management" element={<Navigate to="/docs/restaurant-customer-experience" replace />} />
+          <Route path="restaurant-menu-problems" element={<RestaurantMenuProblemsArticle />} />
+          <Route path="customer-retention-for-restaurants" element={<CustomerRetentionArticle />} />
+          <Route path="why-restaurants-lose-customers" element={<CustomerExperienceArticle />} />
+          <Route path="digital-menu-guide" element={<DigitalMenuGuideArticle />} />
+          <Route path="restaurant-growth-guide" element={<CustomerRetentionArticle />} />
+          <Route path="qr-menu-benefits" element={<QrMenuBenefitsArticle />} />
+          <Route path="restaurant-feedback-management" element={<FeedbackManagementArticle />} />
           <Route path="*" element={<Navigate to="/docs" replace />} />
         </Route>
 

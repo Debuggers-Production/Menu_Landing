@@ -50,7 +50,7 @@ export function LandingPage() {
   }, [])
 
   return (
-    <div className="relative min-h-screen bg-bg overflow-hidden">
+    <div className="relative min-h-screen bg-whiteg overflow-hidden">
       <Helmet>
         <title>MenuKit | Interactive Digital Menus for Modern Restaurants</title>
         <meta name="description" content="MenuKit helps restaurants increase sales and customer retention with beautiful digital menus, QR ordering, and powerful analytics." />

@@ -62,7 +62,7 @@ export default function FinalCTA() {
             <span className="gradient-text">Your Restaurant Menu?</span>
           </h2>
 
-          <p className="text-lg md:text-xl text-subtext max-w-2xl mx-auto mb-12 leading-relaxed">
+          <p className="text-lg md:text-xl text-slate-500 max-w-2xl mx-auto mb-12 leading-relaxed">
             Join thousands of restaurants already using MenuKit. Set up takes less than 5 minutes and it's completely free to start.
           </p>
 
@@ -91,7 +91,7 @@ export default function FinalCTA() {
             whileInView={{ opacity: 1 }}
             viewport={{ once: true }}
             transition={{ delay: 0.5 }}
-            className="mt-12 flex flex-wrap items-center justify-center gap-6 text-sm text-subtext"
+            className="mt-12 flex flex-wrap items-center justify-center gap-6 text-sm text-slate-500"
           >
             <span className="flex items-center gap-2">
               <span className="text-green-400">✓</span> Free forever plan

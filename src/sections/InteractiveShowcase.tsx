@@ -52,7 +52,7 @@ export default function InteractiveShowcase() {
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ delay: 0.2 }}
-            className="text-lg text-subtext max-w-2xl mx-auto"
+            className="text-lg text-slate-500 max-w-2xl mx-auto"
           >
             See how your restaurant menu transforms into a beautiful digital experience.
           </motion.p>
@@ -77,7 +77,7 @@ export default function InteractiveShowcase() {
                     whileInView={{ opacity: 1, y: 0 }}
                     viewport={{ once: true }}
                     transition={{ delay: 0.3 }}
-                    className="text-2xl font-display font-bold text-white"
+                    className="text-2xl font-display font-bold text-slate-900"
                   >
                     🍽️ Bella Cucina
                   </motion.h3>
@@ -86,7 +86,7 @@ export default function InteractiveShowcase() {
                     whileInView={{ opacity: 1, y: 0 }}
                     viewport={{ once: true }}
                     transition={{ delay: 0.4 }}
-                    className="text-sm text-white/60"
+                    className="text-sm text-slate-900/60"
                   >
                     Authentic Italian Restaurant
                   </motion.p>
@@ -98,7 +98,7 @@ export default function InteractiveShowcase() {
                   transition={{ delay: 0.5, type: 'spring' }}
                   className="w-14 h-14 rounded-2xl bg-white/10 backdrop-blur-sm flex items-center justify-center border border-white/10"
                 >
-                  <IoQrCodeOutline className="text-white text-2xl" />
+                  <IoQrCodeOutline className="text-slate-900 text-2xl" />
                 </motion.div>
               </div>
             </motion.div>
@@ -123,8 +123,8 @@ export default function InteractiveShowcase() {
               className="px-6 py-4"
             >
               <div className="flex items-center gap-3 px-4 py-3 rounded-xl bg-white/5 border border-white/10">
-                <IoSearchOutline className="text-subtext" />
-                <span className="text-sm text-subtext">Search for dishes...</span>
+                <IoSearchOutline className="text-slate-500" />
+                <span className="text-sm text-slate-500">Search for dishes...</span>
               </div>
             </motion.div>
 
@@ -145,8 +145,8 @@ export default function InteractiveShowcase() {
                   transition={{ delay: 0.7 + i * 0.05 }}
                   className={`px-4 py-2 rounded-full text-sm whitespace-nowrap transition-all ${
                     i === 0
-                      ? 'bg-primary text-white font-medium'
-                      : 'bg-white/5 text-subtext hover:bg-white/10'
+                      ? 'bg-primary text-slate-900 font-medium'
+                      : 'bg-white/5 text-slate-500 hover:bg-white/10'
                   }`}
                 >
                   {cat}
@@ -168,14 +168,14 @@ export default function InteractiveShowcase() {
                   <div className="flex items-center gap-3">
                     <span className="text-2xl">{item.emoji}</span>
                     <div>
-                      <p className="text-sm font-medium text-white group-hover:text-primary transition-colors">
+                      <p className="text-sm font-medium text-slate-900 group-hover:text-primary transition-colors">
                         {item.name}
                       </p>
                       <div className="flex items-center gap-2 mt-0.5">
                         <span className={`w-3 h-3 rounded-sm ${item.veg ? 'border-2 border-green-500' : 'border-2 border-red-500'}`}>
                           <span className={`block w-1.5 h-1.5 rounded-full mx-auto mt-[1px] ${item.veg ? 'bg-green-500' : 'bg-red-500'}`} />
                         </span>
-                        <span className="text-xs text-subtext">{item.category}</span>
+                        <span className="text-xs text-slate-500">{item.category}</span>
                       </div>
                     </div>
                   </div>

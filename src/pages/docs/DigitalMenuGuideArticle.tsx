@@ -1,12 +1,12 @@
 import { Link } from 'react-router-dom';
 import { Helmet } from 'react-helmet-async';
 
-export function CustomerExperienceArticle() {
+export function DigitalMenuGuideArticle() {
   return (
     <article className="prose-slate max-w-none">
       <Helmet>
-        <title>Restaurant Customer Experience Problems & Solutions | MenuKit</title>
-        <meta name="description" content="Why do restaurants lose customers? Learn about common restaurant customer experience problems and how modern technology solves them." />
+        <title>The Ultimate Digital Menu Guide | MenuKit</title>
+        <meta name="description" content="Everything you need to know about switching to a digital menu." />
       </Helmet>
       <header className="mb-12 border-b border-slate-200 pb-8">
         <div className="flex items-center gap-4 text-sm font-semibold text-slate-500 mb-6">
@@ -14,9 +14,7 @@ export function CustomerExperienceArticle() {
           <span>/</span>
           <span className="text-primary">Customer Experience</span>
         </div>
-        <h1 className="text-4xl md:text-5xl font-black text-slate-900 tracking-tight leading-tight mb-6">
-          Restaurant Customer Experience Problems: Why Restaurants Lose Customers and How Modern Restaurants Solve Them
-        </h1>
+        <h1 className="text-4xl md:text-5xl font-black text-slate-900 tracking-tight leading-tight mb-6">The Ultimate Digital Menu Guide</h1>
         <div className="flex items-center gap-4 text-sm text-slate-500">
           <div className="flex items-center gap-1.5">
             <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>

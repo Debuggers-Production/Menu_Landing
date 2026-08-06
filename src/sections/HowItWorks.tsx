@@ -46,7 +46,7 @@ export default function HowItWorks() {
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ delay: 0.2 }}
-            className="text-lg text-subtext max-w-2xl mx-auto"
+            className="text-lg text-slate-500 max-w-2xl mx-auto"
           >
             Get your digital menu running in just 6 simple steps. It takes less than 5 minutes.
           </motion.p>
@@ -83,7 +83,7 @@ export default function HowItWorks() {
                     className={`w-16 h-16 rounded-2xl bg-gradient-to-br ${step.color} flex items-center justify-center shadow-lg`}
                     style={{ boxShadow: '0 8px 30px rgba(255, 107, 0, 0.2)' }}
                   >
-                    <step.icon className="text-white text-2xl" />
+                    <step.icon className="text-slate-900 text-2xl" />
                   </motion.div>
                 </div>
 
@@ -93,8 +93,8 @@ export default function HowItWorks() {
                     <div className="flex items-center gap-2 mb-2 md:justify-start">
                       <span className="text-xs text-primary font-semibold tracking-wider uppercase">Step {i + 1}</span>
                     </div>
-                    <h3 className="text-xl font-display font-semibold text-white mb-2">{step.title}</h3>
-                    <p className="text-sm text-subtext">{step.desc}</p>
+                    <h3 className="text-xl font-display font-semibold text-slate-900 mb-2">{step.title}</h3>
+                    <p className="text-sm text-slate-500">{step.desc}</p>
                   </div>
                 </div>
 

@@ -61,7 +61,7 @@ export default function Features() {
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ delay: 0.2 }}
-            className="text-lg text-subtext max-w-2xl mx-auto"
+            className="text-lg text-slate-500 max-w-2xl mx-auto"
           >
             Packed with powerful features to make your restaurant menu digital, beautiful, and effortless.
           </motion.p>
@@ -98,12 +98,12 @@ export default function Features() {
 
               <div className="relative z-10">
                 <div className={`w-12 h-12 rounded-xl bg-gradient-to-br ${feature.color} flex items-center justify-center mb-4 group-hover:scale-110 transition-transform duration-300`}>
-                  <feature.icon className="text-white text-xl" />
+                  <feature.icon className="text-slate-900 text-xl" />
                 </div>
-                <h3 className="text-lg font-display font-semibold text-white mb-2 group-hover:text-primary transition-colors duration-300">
+                <h3 className="text-lg font-display font-semibold text-slate-900 mb-2 group-hover:text-primary transition-colors duration-300">
                   {feature.title}
                 </h3>
-                <p className="text-sm text-subtext leading-relaxed">{feature.desc}</p>
+                <p className="text-sm text-slate-500 leading-relaxed">{feature.desc}</p>
               </div>
             </motion.div>
           ))}

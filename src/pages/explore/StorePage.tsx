@@ -125,7 +125,7 @@ export function StorePage() {
         </div>
         <h1 className="text-3xl font-black text-slate-900 mb-2">Store Not Found</h1>
         <p className="text-slate-500 mb-8 max-w-md">We couldn't find the restaurant you were looking for. It might have been removed or the URL is incorrect.</p>
-        <a href={discoverLink} className="bg-primary text-white font-bold px-6 py-3 rounded-full hover:bg-orange-600 transition-colors">
+        <a href={discoverLink} className="bg-primary text-slate-900 font-bold px-6 py-3 rounded-full hover:bg-orange-600 transition-colors">
           Explore Other Restaurants
         </a>
       </div>
@@ -144,7 +144,7 @@ export function StorePage() {
       {/* Dynamic Header Banner */}
       <div className="relative w-full h-[450px]">
         <img 
-          src={shop.banner_url || "https://images.unsplash.com/photo-1555396273-367ea4eb4db5?auto=format&fit=crop&w=2000&q=80"} 
+          src={shop.banner_url || "https://images.unsplash.com/photo-slate-50555396273-367ea4eb4db5?auto=format&fit=crop&w=2000&q=80"} 
           alt={shop.name} 
           className="w-full h-full object-cover" 
         />
@@ -152,7 +152,7 @@ export function StorePage() {
         
         {/* Navigation Breadcrumb inside banner */}
         <div className="absolute top-6 left-6 right-6 flex items-center justify-between z-10 max-w-6xl mx-auto w-full">
-          <a href={discoverLink} className="flex items-center gap-2 text-white/80 hover:text-white bg-black/20 hover:bg-black/40 backdrop-blur px-4 py-2 rounded-full transition-all text-sm font-medium">
+          <a href={discoverLink} className="flex items-center gap-2 text-slate-900/80 hover:text-slate-900 bg-whitelack/20 hover:bg-whitelack/40 backdrop-blur px-4 py-2 rounded-full transition-all text-sm font-medium">
             <ArrowLeft size={16} /> Back to Explore
           </a>
         </div>
@@ -162,18 +162,18 @@ export function StorePage() {
             <div className="w-32 h-32 md:w-40 md:h-40 bg-white rounded-3xl p-2 shadow-2xl shrink-0 ring-4 ring-white/20 transform md:translate-y-8">
               <img src={shop.logo_url || "https://via.placeholder.com/150"} alt={shop.name} className="w-full h-full object-contain rounded-2xl" />
             </div>
-            <div className="text-white flex-1 pb-2">
+            <div className="text-slate-900 flex-1 pb-2">
               <div className="flex flex-wrap items-center gap-3 mb-3">
                 <h1 className="text-4xl md:text-6xl font-black tracking-tight drop-shadow-lg">{shop.name}</h1>
                 {shop.category && (
-                  <span className="bg-primary/90 backdrop-blur text-white text-xs md:text-sm font-bold px-4 py-1.5 rounded-full shadow-lg">
+                  <span className="bg-primary/90 backdrop-blur text-slate-900 text-xs md:text-sm font-bold px-4 py-1.5 rounded-full shadow-lg">
                     {shop.category}
                   </span>
                 )}
               </div>
               <div className="flex flex-wrap items-center gap-6 text-sm md:text-base text-slate-200 font-medium">
                 <div className="flex items-center gap-2"><MapPin size={18} className="text-primary" /> {shop.address}</div>
-                <div className="flex items-center gap-2 text-yellow-400 bg-black/20 px-3 py-1 rounded-full backdrop-blur"><Star size={16} className="fill-yellow-400" /> 4.8 (Verified)</div>
+                <div className="flex items-center gap-2 text-yellow-400 bg-whitelack/20 px-3 py-1 rounded-full backdrop-blur"><Star size={16} className="fill-yellow-400" /> 4.8 (Verified)</div>
               </div>
             </div>
           </div>
@@ -261,13 +261,13 @@ export function StorePage() {
           {/* Sidebar */}
           <aside className="space-y-6">
             {/* Primary Order CTA */}
-            <div className="bg-slate-900 rounded-3xl p-8 shadow-2xl text-white relative overflow-hidden group">
+            <div className="bg-slate-900 rounded-3xl p-8 shadow-2xl text-slate-900 relative overflow-hidden group">
               <div className="absolute top-0 right-0 w-64 h-64 bg-primary rounded-full blur-3xl opacity-20 group-hover:opacity-30 transition-opacity translate-x-20 -translate-y-20"></div>
               <h3 className="text-2xl font-black mb-2 relative z-10">Hungry?</h3>
               <p className="text-slate-300 text-sm mb-8 relative z-10 leading-relaxed">Browse the full digital menu, customize your items, and order directly online.</p>
               <a 
                 href={orderLink}
-                className="relative z-10 w-full flex items-center justify-center gap-2 bg-primary hover:bg-orange-500 text-white font-bold py-4 px-6 rounded-2xl transition-all hover:scale-[1.02] active:scale-[0.98] shadow-lg shadow-primary/25"
+                className="relative z-10 w-full flex items-center justify-center gap-2 bg-primary hover:bg-orange-500 text-slate-900 font-bold py-4 px-6 rounded-2xl transition-all hover:scale-[1.02] active:scale-[0.98] shadow-lg shadow-primary/25"
               >
                 Explore their Menu <ExternalLink size={18} />
               </a>

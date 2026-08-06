@@ -49,7 +49,7 @@ export default function Problem() {
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ delay: 0.2 }}
-            className="text-lg text-subtext max-w-2xl mx-auto"
+            className="text-lg text-slate-500 max-w-2xl mx-auto"
           >
             Restaurants waste thousands on printed menus that become outdated the moment prices change.
           </motion.p>
@@ -84,8 +84,8 @@ export default function Problem() {
                       <item.icon className="text-red-400 text-lg" />
                     </div>
                     <div>
-                      <p className="font-medium text-white mb-1">{item.label}</p>
-                      <p className="text-sm text-subtext">{item.desc}</p>
+                      <p className="font-medium text-slate-900 mb-1">{item.label}</p>
+                      <p className="text-sm text-slate-500">{item.desc}</p>
                     </div>
                   </motion.div>
                 ))}
@@ -120,8 +120,8 @@ export default function Problem() {
                       <item.icon className="text-primary text-lg" />
                     </div>
                     <div>
-                      <p className="font-medium text-white mb-1">{item.label}</p>
-                      <p className="text-sm text-subtext">{item.desc}</p>
+                      <p className="font-medium text-slate-900 mb-1">{item.label}</p>
+                      <p className="text-sm text-slate-500">{item.desc}</p>
                     </div>
                   </motion.div>
                 ))}

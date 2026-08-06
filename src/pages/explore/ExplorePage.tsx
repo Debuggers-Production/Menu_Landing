@@ -143,12 +143,12 @@ export function ExplorePage() {
                       <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent z-10" />
                       {shop.logo_url && <img src={shop.logo_url} alt={shop.name} className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" />}
                       {shop.best_discount_label && (
-                        <div className="absolute top-4 left-4 z-20 bg-primary text-white text-xs font-bold px-3 py-1 rounded-full shadow-sm">
+                        <div className="absolute top-4 left-4 z-20 bg-primary text-slate-900 text-xs font-bold px-3 py-1 rounded-full shadow-sm">
                           {shop.best_discount_label}
                         </div>
                       )}
-                      <div className="absolute bottom-4 left-4 z-20 flex items-center gap-2 text-white">
-                        <div className="flex items-center gap-1 bg-black/40 backdrop-blur-md px-2 py-1 rounded text-xs font-medium">
+                      <div className="absolute bottom-4 left-4 z-20 flex items-center gap-2 text-slate-900">
+                        <div className="flex items-center gap-1 bg-whitelack/40 backdrop-blur-md px-2 py-1 rounded text-xs font-medium">
                           <Star size={12} className="text-yellow-400 fill-yellow-400" />
                           {shop.average_rating || 'New'}
                         </div>

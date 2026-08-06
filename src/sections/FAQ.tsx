@@ -57,7 +57,7 @@ export default function FAQ() {
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ delay: 0.2 }}
-            className="text-lg text-subtext"
+            className="text-lg text-slate-500"
           >
             Everything you need to know about MenuKit.
           </motion.p>
@@ -78,7 +78,7 @@ export default function FAQ() {
                 onClick={() => setOpenIndex(openIndex === i ? null : i)}
                 className="w-full flex items-center justify-between p-6 text-left"
               >
-                <span className="font-display font-semibold text-white text-base pr-4">
+                <span className="font-display font-semibold text-slate-900 text-base pr-4">
                   {faq.question}
                 </span>
                 <motion.div
@@ -100,7 +100,7 @@ export default function FAQ() {
                     className="overflow-hidden"
                   >
                     <div className="px-6 pb-6">
-                      <p className="text-subtext leading-relaxed text-sm">
+                      <p className="text-slate-500 leading-relaxed text-sm">
                         {faq.answer}
                       </p>
                     </div>

@@ -17,50 +17,57 @@ interface Feature {
 
 const ADDONS: Feature[] = [
   {
+    id: 'online-orders',
+    name: 'Online Visibility & Orders Accept',
+    price: 129,
+    description: 'Accept online delivery & takeaway orders directly with live online menu visibility.',
+    category: 'Online Ordering',
+  },
+  {
     id: 'member-count',
     name: 'New Member Count',
-    price: 100,
+    price: 99,
     description: 'Track how many new members/customers join every month seamlessly.',
     category: 'Relationship Marketing',
   },
   {
     id: 'member-details',
     name: 'New Member + Details',
-    price: 150,
+    price: 129,
     description: 'Store and manage deep customer information along with member growth metrics.',
     category: 'Relationship Marketing',
   },
   {
     id: 'search-data',
     name: 'Customer Search Data',
-    price: 60,
+    price: 69,
     description: 'Access search analytics and real-time customer interest insights.',
     category: 'Marketing',
   },
   {
     id: 'custom-theme',
     name: 'Custom Theme Studio',
-    price: 60,
+    price: 69,
     description: 'Customize colors, logos, and custom branding of your digital menu.',
     category: 'Branding',
   },
   {
     id: 'analytics-advanced-filters',
     name: 'Advanced Analytics Filters',
-    price: 50,
+    price: 59,
     description: 'Unlock 7-day, 30-day, and Custom Date range filters for your dashboard.',
     category: 'Analytics',
   },
   {
     id: 'analytics-customer-insights',
     name: 'Customer Insights Report',
-    price: 50,
+    price: 59,
     description: 'Access detailed reports on customer views and repeat visits.',
     category: 'Analytics',
   },
 ];
 
-const ALL_ACCESS_PRICE = 299;
+const ALL_ACCESS_PRICE = 399;
 
 export default function Pricing() {
   const ref = useRef(null)
@@ -110,27 +117,39 @@ export default function Pricing() {
     }
   };
 
-  const { total, activeItems } = useMemo(() => {
-    if (isAllAccess) {
-      return { total: ALL_ACCESS_PRICE, activeItems: [] };
-    }
-    
-    let sum = 0;
+  const { baseTotal, pgFee, gstFee, grandTotal, activeItems } = useMemo(() => {
+    let base = 0;
     const items: Feature[] = [];
-    selectedFeatures.forEach((id) => {
-      const feature = ADDONS.find(a => a.id === id);
-      if (feature) {
-        sum += feature.price;
-        items.push(feature);
-      }
-    });
-    return { total: sum, activeItems: items };
+
+    if (isAllAccess) {
+      base = ALL_ACCESS_PRICE;
+    } else {
+      selectedFeatures.forEach((id) => {
+        const feature = ADDONS.find(a => a.id === id);
+        if (feature) {
+          base += feature.price;
+          items.push(feature);
+        }
+      });
+    }
+
+    const fee = Math.round((base * 0.03) * 100) / 100;
+    const gst = Math.round((fee * 0.18) * 100) / 100;
+    const total = Math.round((base + fee + gst) * 100) / 100;
+
+    return {
+      baseTotal: base,
+      pgFee: fee,
+      gstFee: gst,
+      grandTotal: total,
+      activeItems: items
+    };
   }, [selectedFeatures, isAllAccess]);
 
   return (
-    <SectionWrapper id="pricing" className="bg-[#0b0f19] relative">
+    <SectionWrapper id="pricing" className="bg-white relative">
       {/* Background Decorative Ambient Gradients */}
-      <div className="absolute top-0 left-1/2 -translate-x-1/2 w-full max-w-7xl h-[500px] pointer-events-none overflow-hidden z-0 opacity-40 dark:opacity-70">
+      <div className="absolute top-0 left-1/2 -translate-x-1/2 w-full max-w-7xl h-[500px] pointer-events-none overflow-hidden z-0 opacity-40">
         <div className="absolute -top-40 left-10 w-72 h-72 bg-primary/30 rounded-full blur-[120px]" />
         <div className="absolute -top-20 right-10 w-80 h-80 bg-orange-500/20 rounded-full blur-[100px]" />
       </div>
@@ -147,7 +166,7 @@ export default function Pricing() {
           <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-orange-950/40 border border-orange-900/40 text-primary text-[11px] font-bold uppercase tracking-wider mb-3">
             <Sparkles size={12} className="animate-pulse" /> Add-On Marketplace
           </div>
-          <h2 className="text-3xl sm:text-5xl font-black tracking-tight text-white mb-3">
+          <h2 className="text-3xl sm:text-5xl font-black tracking-tight text-slate-900 mb-3">
             Build Your <span className="bg-gradient-to-r from-primary via-orange-500 to-orange-500 bg-clip-text text-transparent">Custom Plan</span>
           </h2>
           <p className="text-slate-400 max-w-md mx-auto text-sm sm:text-base px-2">
@@ -168,7 +187,7 @@ export default function Pricing() {
               className={cn(
                 "flex-1 flex items-center justify-center gap-2 py-3 px-3 rounded-xl text-xs sm:text-sm font-bold transition-all duration-300",
                 !isAllAccess 
-                  ? "bg-[#1e294b] text-white" 
+                  ? "bg-[#1e294b] text-slate-900" 
                   : "text-slate-400 hover:text-slate-200"
               )}
             >
@@ -180,13 +199,13 @@ export default function Pricing() {
               className={cn(
                 "flex-1 flex items-center justify-center gap-2 py-3 px-3 rounded-xl text-xs sm:text-sm font-bold transition-all duration-300 relative",
                 isAllAccess 
-                  ? "bg-gradient-to-r from-primary to-orange-600 text-white shadow-lg shadow-primary/20" 
+                  ? "bg-gradient-to-r from-primary to-orange-600 text-slate-900 shadow-lg shadow-primary/20" 
                   : "text-slate-400 hover:text-slate-200"
               )}
             >
               <Award size={14} className={isAllAccess ? "text-amber-300" : ""} />
               All-Access Pack
-              <span className="absolute -top-1.5 right-1 bg-amber-500 text-[9px] text-white px-1.5 py-0.5 rounded-full font-black shadow-sm">
+              <span className="absolute -top-1.5 right-1 bg-slate-100mber-500 text-[9px] text-slate-900 px-1.5 py-0.5 rounded-full font-black shadow-sm">
                 MAX
               </span>
             </button>
@@ -209,7 +228,7 @@ export default function Pricing() {
               </div>
               <div className="flex items-center justify-between mb-3">
                 <h3 className="font-extrabold text-slate-200 text-xs tracking-wider uppercase">Included Free Bundle</h3>
-                <span className="text-[10px] bg-emerald-500 text-white font-black px-2.5 py-0.5 rounded-full shadow-sm shadow-emerald-500/30">100% FREE</span>
+                <span className="text-[10px] bg-emerald-500 text-slate-900 font-black px-2.5 py-0.5 rounded-full shadow-sm shadow-emerald-500/30">100% FREE</span>
               </div>
               <div className="flex items-baseline gap-1 mb-3">
                 <span className="text-3xl font-black text-emerald-400">₹0</span>
@@ -227,7 +246,7 @@ export default function Pricing() {
 
             {/* Smart Banner for Mobile & Desktop Upsell */}
             {!isAllAccess && (
-              <div className="bg-gradient-to-br from-[#121829] via-[#1a233d] to-[#111625] text-white rounded-2xl p-5 border border-primary/20 shadow-xl relative overflow-hidden group">
+              <div className="bg-gradient-to-br from-[#121829] via-[#1a233d] to-[#111625] text-slate-900 rounded-2xl p-5 border border-primary/20 shadow-xl relative overflow-hidden group">
                 <div className="absolute top-0 right-0 w-32 h-32 bg-primary/10 rounded-full blur-xl" />
                 <h4 className="font-bold text-sm mb-1 flex items-center gap-1.5 text-orange-200">
                   <Sparkles size={14} className="text-amber-400" /> Unlock True Efficiency
@@ -237,7 +256,7 @@ export default function Pricing() {
                 </p>
                 <button 
                   onClick={() => handlePlanTypeChange('all-access')}
-                  className="w-full bg-primary hover:bg-orange-500 text-white py-2.5 rounded-xl text-xs font-bold transition-all flex items-center justify-center gap-1 shadow-md shadow-primary/10"
+                  className="w-full bg-primary hover:bg-orange-500 text-slate-900 py-2.5 rounded-xl text-xs font-bold transition-all flex items-center justify-center gap-1 shadow-md shadow-primary/10"
                 >
                   Switch to All-Access <ArrowRight size={12} />
                 </button>
@@ -259,11 +278,11 @@ export default function Pricing() {
                 
                 <div className="flex flex-col sm:flex-row gap-5 sm:items-center justify-between relative z-10 pb-6 border-b border-slate-800/80">
                   <div className="flex items-start gap-3.5">
-                    <div className="w-12 h-12 rounded-2xl bg-gradient-to-br from-primary to-orange-600 text-white flex items-center justify-center shadow-lg shadow-primary/20 shrink-0 mt-0.5">
+                    <div className="w-12 h-12 rounded-2xl bg-gradient-to-br from-primary to-orange-600 text-slate-900 flex items-center justify-center shadow-lg shadow-primary/20 shrink-0 mt-0.5">
                       <Award size={22} />
                     </div>
                     <div>
-                      <h3 className="text-xl sm:text-2xl font-black text-white">All-Access Bundle</h3>
+                      <h3 className="text-xl sm:text-2xl font-black text-slate-900">All-Access Bundle</h3>
                       <p className="text-xs sm:text-sm text-slate-400 mt-1 max-w-xs">
                         Complete feature catalog package clearance with no operational volume bounds or rate capping tiers.
                       </p>
@@ -284,7 +303,7 @@ export default function Pricing() {
                   <div className="grid grid-cols-1 sm:grid-cols-2 gap-2.5">
                     {ADDONS.map((addon) => (
                       <div key={addon.id} className="flex items-center gap-2.5 bg-[#171f30]/60 p-3 rounded-xl border border-slate-800/40">
-                        <div className="w-4 h-4 rounded-full bg-emerald-500 text-white flex items-center justify-center shrink-0 shadow-sm">
+                        <div className="w-4 h-4 rounded-full bg-emerald-500 text-slate-900 flex items-center justify-center shrink-0 shadow-sm">
                           <Check size={10} strokeWidth={3} />
                         </div>
                         <span className="font-semibold text-xs text-slate-300 truncate">{addon.name}</span>
@@ -335,7 +354,7 @@ export default function Pricing() {
                               <div>
                                 <div className="flex justify-between items-start gap-3 mb-2">
                                   <div>
-                                    <h4 className="font-extrabold text-white text-sm sm:text-base leading-snug mt-1.5 transition-colors group-hover:text-primary">
+                                    <h4 className="font-extrabold text-slate-900 text-sm sm:text-base leading-snug mt-1.5 transition-colors group-hover:text-primary">
                                       {feature.name}
                                     </h4>
                                   </div>
@@ -344,7 +363,7 @@ export default function Pricing() {
                                   <div className={cn(
                                     "w-5 h-5 rounded-full border flex items-center justify-center shrink-0 transition-all duration-300 shadow-inner mt-0.5",
                                     isSelected 
-                                      ? "bg-primary border-primary text-white scale-110 shadow-primary/20" 
+                                      ? "bg-primary border-primary text-slate-900 scale-110 shadow-primary/20" 
                                       : "border-slate-700 bg-[#182032]"
                                   )}>
                                     {isSelected && <Check size={11} strokeWidth={3} />}
@@ -361,7 +380,7 @@ export default function Pricing() {
                                   <HelpCircle size={11} /> Multi-use
                                 </span>
                                 <div className="text-right">
-                                  <span className="font-black text-white text-sm sm:text-base">₹{feature.price}</span>
+                                  <span className="font-black text-slate-900 text-sm sm:text-base">₹{feature.price}</span>
                                   <span className="text-[10px] text-slate-400 font-bold">/mo</span>
                                 </div>
                               </div>
@@ -383,61 +402,54 @@ export default function Pricing() {
           initial={{ opacity: 0, y: 20 }}
           animate={isInView ? { opacity: 1, y: 0 } : {}}
           transition={{ duration: 0.5, delay: 0.4 }}
-          className="mt-6 mb-12 bg-[#0b0f19]/80 backdrop-blur-xl border border-slate-800/80 rounded-3xl shadow-[0_10px_40px_rgba(0,0,0,0.4)] z-50 p-6 transition-transform duration-300 relative overflow-hidden"
+          className="mt-6 mb-12 bg-[#0b0f19]/90 backdrop-blur-xl border border-slate-800/80 rounded-3xl shadow-[0_10px_40px_rgba(0,0,0,0.4)] z-50 p-5 sm:p-6 transition-transform duration-300 relative overflow-hidden"
         >
           {/* Subtle glow behind calculator */}
           <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-full h-full bg-primary/5 blur-[100px] pointer-events-none rounded-full" />
           
-          <div className="max-w-4xl mx-auto flex flex-col md:flex-row items-center justify-between gap-6 relative z-10">
+          <div className="max-w-4xl mx-auto space-y-3 relative z-10">
             
-            {/* Meta Pricing Details Layer */}
-            <div className="flex items-center gap-4 w-full md:w-auto justify-between md:justify-start">
-              <div className="flex items-center gap-4">
-                <div className="w-12 h-12 rounded-xl bg-[#131b2e] flex items-center justify-center text-slate-400 border border-slate-700/20 shrink-0">
-                  <ShoppingCart size={20} />
+            {/* Top Line: Setup & Itemized Fee Breakdown Pill */}
+            <div className="flex flex-wrap items-center justify-between gap-2 text-xs font-semibold text-slate-300 pb-2.5 border-b border-slate-800/80">
+              <div className="flex items-center gap-2 min-w-0">
+                <div className="w-6 h-6 rounded-lg bg-[#131b2e] flex items-center justify-center text-slate-400 border border-slate-700/20 shrink-0">
+                  <ShoppingCart size={13} />
                 </div>
-                <div className="min-w-0">
-                  <span className="text-[11px] text-slate-400 font-bold uppercase tracking-widest block leading-none mb-1.5">Your Setup</span>
-                  <div className="flex items-center gap-2 text-sm font-bold text-slate-200">
-                    <span>Core (₹0)</span>
-                    <span className="text-slate-700">•</span>
-                    {isAllAccess ? (
-                      <span className="text-primary font-extrabold text-xs bg-primary/10 px-2 py-0.5 rounded-md">All-Access Pack</span>
-                    ) : (
-                      <span className="text-slate-400 font-semibold text-xs">
-                        {activeItems.length === 0 ? 'No add-ons' : `${activeItems.length} active module${activeItems.length !== 1 ? 's' : ''}`}
-                      </span>
-                    )}
-                  </div>
-                </div>
+                <span className="truncate">
+                  {isAllAccess ? (
+                    <span className="text-primary font-extrabold bg-primary/10 px-2 py-0.5 rounded-md">All-Access Pack</span>
+                  ) : (
+                    <span className="text-slate-400">{activeItems.length === 0 ? 'No modules selected' : `${activeItems.length} active module${activeItems.length !== 1 ? 's' : ''}`}</span>
+                  )}
+                </span>
               </div>
 
-              {/* Total display localized inside mobile line alignment split */}
-              <div className="text-right md:hidden">
-                <span className="text-[10px] text-slate-400 font-bold uppercase tracking-widest block mb-1">Total</span>
-                <div className="flex items-baseline justify-end gap-1">
-                  <span className="text-3xl font-black text-white tracking-tight">₹{total}</span>
-                  <span className="text-xs font-bold text-slate-400">/mo</span>
-                </div>
+              {/* Itemized Calculation Summary Pill */}
+              <div className="flex items-center gap-1.5 text-[10px] sm:text-xs text-slate-400 font-medium shrink-0 bg-slate-800/80 px-2.5 sm:px-3 py-1 rounded-lg border border-slate-700/60">
+                <span>Base: <strong className="text-slate-900">₹{baseTotal.toFixed(2)}</strong></span>
+                <span>+</span>
+                <span>3% PG: <strong className="text-slate-900">₹{pgFee.toFixed(2)}</strong></span>
+                <span>+</span>
+                <span>18% GST: <strong className="text-slate-900">₹{gstFee.toFixed(2)}</strong></span>
               </div>
             </div>
 
-            {/* Total display & Interactive Checkout Call-out Button Bundle */}
-            <div className="flex items-center justify-between md:justify-end gap-8 w-full md:w-auto pt-6 border-t border-slate-800 md:border-0 md:pt-0">
-              {/* Main Desktop Total Wrapper */}
-              <div className="text-right hidden md:block">
-                <span className="text-[11px] text-slate-400 font-bold uppercase tracking-widest block mb-1">Total Investment</span>
-                <div className="flex items-baseline justify-end gap-1">
-                  <span className="text-4xl font-black text-white tracking-tight">₹{total}</span>
-                  <span className="text-sm font-bold text-slate-400">/mo</span>
+            {/* Bottom Line: Total Payable & Action Callout */}
+            <div className="flex items-center justify-between gap-4">
+              <div className="min-w-0">
+                <span className="text-[10px] text-slate-400 font-bold uppercase tracking-widest block leading-none">Total Payable Bill</span>
+                <div className="flex items-baseline gap-1 mt-1">
+                  <span className="text-3xl sm:text-4xl font-black text-slate-900 tracking-tight">₹{grandTotal.toFixed(2)}</span>
+                  <span className="text-xs sm:text-sm font-bold text-slate-400">/mo</span>
                 </div>
               </div>
-              
+
               <a
-                href={`${import.meta.env.VITE_MAIN_APP_URL || 'http://localhost:5173'}/login`}
-                className="w-full md:w-auto shimmer-btn px-10 py-4 rounded-xl font-bold shadow-lg shadow-primary/20 transition-all duration-200 flex items-center justify-center min-w-[180px] text-base hover:scale-105 active:scale-[0.97]"
+                href="https://app.menukit.com/subscription"
+                className="bg-gradient-to-r from-orange-500 via-primary to-orange-600 hover:brightness-110 text-slate-900 px-6 sm:px-8 py-3 rounded-xl font-black shadow-lg shadow-orange-500/25 transition-all duration-200 flex items-center justify-center text-xs sm:text-sm active:scale-[0.97] touch-manipulation gap-2 uppercase tracking-wider shrink-0"
               >
-                Get Started Now
+                <Zap size={16} className="fill-white text-slate-900 animate-bounce" />
+                <span>Get Started Now</span>
               </a>
             </div>
 

@@ -98,7 +98,7 @@ export default function Testimonials() {
                 </div>
 
                 {/* Quote */}
-                <p className="text-lg md:text-xl text-white/90 leading-relaxed mb-8 font-light italic">
+                <p className="text-lg md:text-xl text-slate-900/90 leading-relaxed mb-8 font-light italic">
                   "{testimonials[active].text}"
                 </p>
 
@@ -108,8 +108,8 @@ export default function Testimonials() {
                     {testimonials[active].avatar}
                   </div>
                   <div>
-                    <p className="font-display font-semibold text-white">{testimonials[active].name}</p>
-                    <p className="text-sm text-subtext">{testimonials[active].role}</p>
+                    <p className="font-display font-semibold text-slate-900">{testimonials[active].name}</p>
+                    <p className="text-sm text-slate-500">{testimonials[active].role}</p>
                   </div>
                 </div>
               </motion.div>

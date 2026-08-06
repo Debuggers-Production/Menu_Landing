@@ -77,9 +77,9 @@ export default function Hero() {
               style={{ animationDuration: `${5 + i * 0.5}s` }}
             >
               <div className={`w-10 h-10 rounded-xl bg-gradient-to-br ${card.color} flex items-center justify-center`}>
-                <card.icon className="text-white text-lg" />
+                <card.icon className="text-slate-900 text-lg" />
               </div>
-              <span className="text-sm font-medium text-white/80">{card.label}</span>
+              <span className="text-sm font-medium text-slate-900/80">{card.label}</span>
             </div>
           </motion.div>
         ))}
@@ -121,10 +121,10 @@ export default function Hero() {
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 1.2, duration: 0.8 }}
-          className="text-lg md:text-xl text-subtext max-w-2xl mx-auto mb-12 leading-relaxed"
+          className="text-lg md:text-xl text-slate-500 max-w-2xl mx-auto mb-12 leading-relaxed"
         >
           Create beautiful QR-powered restaurant menus in minutes.{' '}
-          <span className="text-white/70">No printing. No app downloads.</span>{' '}
+          <span className="text-slate-900/70">No printing. No app downloads.</span>{' '}
           Update your menu anytime.
         </motion.p>
 
@@ -166,7 +166,7 @@ export default function Hero() {
                   <div className="w-3 h-3 rounded-full bg-green-500/80" />
                 </div>
                 <div className="flex-1 flex justify-center">
-                  <div className="px-4 py-1 rounded-lg bg-white/5 text-xs text-subtext">
+                  <div className="px-4 py-1 rounded-lg bg-white/5 text-xs text-slate-500">
                     menukit.debuggers.co.in
                   </div>
                 </div>
@@ -184,7 +184,7 @@ export default function Hero() {
                     <div className="px-3 py-1.5 rounded-lg bg-primary/20 text-primary text-xs font-medium">
                       + Add Item
                     </div>
-                    <div className="px-3 py-1.5 rounded-lg bg-white/5 text-xs text-subtext">
+                    <div className="px-3 py-1.5 rounded-lg bg-white/5 text-xs text-slate-500">
                       Preview
                     </div>
                   </div>
@@ -205,8 +205,8 @@ export default function Hero() {
                       transition={{ delay: 2.2 + i * 0.1 }}
                       className="p-3 rounded-xl bg-white/[0.03] border border-white/5"
                     >
-                      <p className="text-[10px] text-subtext mb-1">{stat.label}</p>
-                      <p className="text-lg font-semibold text-white">{stat.value}</p>
+                      <p className="text-[10px] text-slate-500 mb-1">{stat.label}</p>
+                      <p className="text-lg font-semibold text-slate-900">{stat.value}</p>
                       <p className="text-[10px] text-green-400">{stat.trend}</p>
                     </motion.div>
                   ))}
@@ -223,7 +223,7 @@ export default function Hero() {
                         transition={{ delay: 2.6 + i * 0.1 }}
                         className="flex items-center justify-between p-3 rounded-xl bg-white/[0.02] border border-white/5"
                       >
-                        <span className="text-sm text-white/80">{item}</span>
+                        <span className="text-sm text-slate-900/80">{item}</span>
                         <div className="flex items-center gap-3">
                           <span className="text-sm text-primary font-medium">$12.99</span>
                           <div className="w-8 h-4 rounded-full bg-primary/30 relative">
@@ -246,7 +246,7 @@ export default function Hero() {
           transition={{ delay: 3 }}
           className="mt-16 flex flex-col items-center gap-2"
         >
-          <span className="text-xs text-subtext">Scroll to explore</span>
+          <span className="text-xs text-slate-500">Scroll to explore</span>
           <div
             className="w-6 h-10 rounded-full border border-white/20 flex items-start justify-center pt-2 animate-[scroll-bounce_1.5s_infinite]"
           >

@@ -51,7 +51,7 @@ function AnimatedCounter({ target, suffix, label, prefix = '', delay = 0 }: Coun
       <div className="text-5xl md:text-6xl font-display font-bold gradient-text mb-3">
         {prefix}{count}{suffix}
       </div>
-      <p className="text-subtext text-sm">{label}</p>
+      <p className="text-slate-500 text-sm">{label}</p>
     </motion.div>
   )
 }
@@ -92,7 +92,7 @@ export default function Benefits() {
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ delay: 0.2 }}
-            className="text-lg text-subtext max-w-2xl mx-auto"
+            className="text-lg text-slate-500 max-w-2xl mx-auto"
           >
             Real impact for real restaurants. See why thousands are making the switch.
           </motion.p>

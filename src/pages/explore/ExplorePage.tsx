@@ -1,5 +1,6 @@
 import { useState, useEffect } from 'react';
 import { useParams, Link } from 'react-router-dom';
+import { APP_CONFIG } from '../../config';
 import { Helmet } from 'react-helmet-async';
 import { MapPin, Star, Clock, Navigation } from 'lucide-react';
 import { InfiniteScrollTrigger } from '../../components/InfiniteScrollTrigger';
@@ -30,7 +31,7 @@ export function ExplorePage() {
   const [offset, setOffset] = useState(0);
   const [hasMore, setHasMore] = useState(true);
 
-  const API_URL = import.meta.env.VITE_API_URL || 'http://localhost:8002/api/v1';
+  const API_URL = APP_CONFIG.API_URL;
 
   const fetchShops = async (currentOffset: number, isInitial = false) => {
     try {

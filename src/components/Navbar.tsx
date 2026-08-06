@@ -1,4 +1,5 @@
 import { useState, useEffect } from 'react'
+import { APP_CONFIG } from '../config'
 import { motion, AnimatePresence } from 'framer-motion'
 import { HiOutlineMenuAlt3, HiOutlineX } from 'react-icons/hi'
 import { Link } from 'react-router-dom'
@@ -71,7 +72,7 @@ export default function Navbar() {
 
             {/* Desktop CTA */}
             <div className="hidden md:flex items-center gap-3">
-              <a href={import.meta.env.VITE_MAIN_APP_URL || 'http://localhost:5173'} className="shimmer-btn px-5 py-2.5 text-sm inline-block">
+              <a href={APP_CONFIG.MAIN_APP_URL} className="shimmer-btn px-5 py-2.5 text-sm inline-block">
                 Start Free
               </a>
             </div>
@@ -121,7 +122,7 @@ export default function Navbar() {
                 )
               ))}
               <div className="mt-6 flex flex-col gap-3">
-                <a href={import.meta.env.VITE_MAIN_APP_URL || 'http://localhost:5173'} className="shimmer-btn px-6 py-3 text-base w-full text-center">
+                <a href={APP_CONFIG.MAIN_APP_URL} className="shimmer-btn px-6 py-3 text-base w-full text-center">
                   Start Free
                 </a>
               </div>

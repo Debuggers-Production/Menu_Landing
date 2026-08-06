@@ -16,7 +16,7 @@ import { FeedbackManagementArticle } from './pages/docs/FeedbackManagementArticl
 function App() {
   return (
     <HelmetProvider>
-      <BrowserRouter basename="/landing">
+      <BrowserRouter basename="/menukit">
         <Routes>
         <Route path="/" element={<LandingPage />} />
         

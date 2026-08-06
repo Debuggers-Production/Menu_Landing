@@ -1,5 +1,6 @@
 import { useState, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
+import { APP_CONFIG } from '../../config';
 import { Helmet } from 'react-helmet-async';
 import { MapPin, Clock, Phone, Globe, Star, ExternalLink, ShieldCheck, Tag, ArrowRight, ArrowLeft } from 'lucide-react';
 
@@ -52,8 +53,8 @@ export function StorePage() {
   const [otherShops, setOtherShops] = useState<ShopData[]>([]);
   const [loading, setLoading] = useState(true);
 
-  const API_URL = import.meta.env.VITE_API_URL || 'http://localhost:8002/api/v1';
-  const MAIN_APP_URL = import.meta.env.VITE_MAIN_APP_URL || 'http://localhost:5173';
+  const API_URL = APP_CONFIG.API_URL;
+  const MAIN_APP_URL = APP_CONFIG.MAIN_APP_URL;
   const discoverLink = `${MAIN_APP_URL}/discover/stores`;
 
   useEffect(() => {

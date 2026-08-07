@@ -120,7 +120,7 @@ export function CustomerExperienceArticle() {
           <p className="mb-4">
             <strong>Dietary preferences and allergies</strong> are more prevalent than ever. A customer requesting a gluten-free modification relies entirely on the server accurately writing it down and conveying it to the kitchen. Language barriers between staff and tourists further exacerbate these issues.
           </p>
-          <div className="bg-slate-900 text-slate-900 p-6 rounded-xl my-6">
+          <div className="bg-slate-900 text-white p-6 rounded-xl my-6">
             <h4 className="font-bold mb-2">Scenario</h4>
             <p className="text-slate-300 text-sm">
               A tourist visits a local tapas bar but cannot speak the native language. They attempt to point and gesture to order, resulting in receiving the wrong dish. The customer is too polite to complain, but they leave dissatisfied and will not recommend the restaurant.

@@ -13,12 +13,17 @@ import { CustomerRetentionArticle } from './pages/docs/CustomerRetentionArticle'
 import { DigitalMenuGuideArticle } from './pages/docs/DigitalMenuGuideArticle';
 import { QrMenuBenefitsArticle } from './pages/docs/QrMenuBenefitsArticle';
 import { FeedbackManagementArticle } from './pages/docs/FeedbackManagementArticle';
+import { PrivacyPolicyPage } from './pages/PrivacyPolicyPage';
+import { TermsOfServicePage } from './pages/TermsOfServicePage';
+
 function App() {
   return (
     <HelmetProvider>
       <BrowserRouter basename="/menukit">
         <Routes>
         <Route path="/" element={<LandingPage />} />
+        <Route path="/privacy" element={<PrivacyPolicyPage />} />
+        <Route path="/terms" element={<TermsOfServicePage />} />
         
         <Route path="/docs" element={<DocsLayout />}>
           <Route index element={<DocsIndexPage />} />

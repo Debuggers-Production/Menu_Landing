@@ -24,6 +24,14 @@ const faqs = [
     question: 'How much does it cost?',
     answer: 'MenuKit is currently completely free for early adopters! We wanted to eliminate the expensive fees other platforms charge, saving you 90% on menu-related costs.',
   },
+  {
+    question: 'How do customers check their order profile?',
+    answer: (
+      <>
+        Customers can simply visit <a href="https://menukit.debuggerstechnologies.com/customer" target="_blank" rel="noopener noreferrer" className="text-primary hover:underline font-medium">menukit.debuggerstechnologies.com/customer</a> to check their order history, manage their profile, and more.
+      </>
+    ),
+  },
 ]
 
 export default function FAQ() {

@@ -55,7 +55,7 @@ export default function HowItWorks() {
         {/* Timeline */}
         <div ref={ref} className="relative max-w-4xl mx-auto">
           {/* Vertical Line */}
-          <div className="absolute left-8 md:left-1/2 top-0 bottom-0 w-px bg-white/5 md:-translate-x-px">
+          <div className="absolute left-8 md:left-1/2 top-0 bottom-0 w-px bg-black/5 md:-translate-x-px">
             <motion.div
               initial={{ height: '0%' }}
               animate={isInView ? { height: '100%' } : {}}

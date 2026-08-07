@@ -2,6 +2,7 @@ import { useMemo } from 'react'
 import { motion } from 'framer-motion'
 import SectionWrapper from '../components/SectionWrapper'
 import { APP_CONFIG } from '../config'
+import { IoRocketOutline } from 'react-icons/io5'
 
 function Particle() {
   const style = useMemo(() => ({
@@ -54,7 +55,9 @@ export default function FinalCTA() {
             className="w-20 h-20 rounded-3xl bg-gradient-to-br from-primary to-secondary flex items-center justify-center mx-auto mb-8"
             style={{ boxShadow: '0 20px 60px rgba(255, 107, 0, 0.3)' }}
           >
-            <span className="text-3xl">🚀</span>
+            <span className="text-4xl text-white">
+              <IoRocketOutline />
+            </span>
           </motion.div>
 
           <h2 className="text-4xl md:text-5xl lg:text-7xl font-display font-bold mb-6 leading-tight">

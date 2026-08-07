@@ -19,7 +19,7 @@ export function DocsLayout() {
           </Link>
           <nav className="hidden md:flex items-center gap-6">
             <Link to="/docs" className="text-sm font-semibold text-slate-600 hover:text-primary transition-colors">All Articles</Link>
-            <a href={`${APP_CONFIG.MAIN_APP_URL}/login`} className="text-sm font-bold text-slate-900 bg-slate-900 hover:bg-slate-800 px-4 py-2 rounded-lg transition-colors">Dashboard</a>
+            <a href={`${APP_CONFIG.MAIN_APP_URL}/login`} className="text-sm font-bold text-white bg-slate-900 hover:bg-slate-800 px-4 py-2 rounded-lg transition-colors">Dashboard</a>
           </nav>
         </div>
       </header>

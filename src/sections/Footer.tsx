@@ -1,11 +1,21 @@
+import { Link } from 'react-router-dom';
 import { IoLogoTwitter, IoLogoInstagram, IoLogoLinkedin, IoLogoGithub } from 'react-icons/io5'
 import logo from "../assets/menukit-logo.svg";
 
 const footerLinks = {
-  Product: ['Features', 'Pricing', 'Demo', 'Templates', 'API'],
-  Company: ['About', 'Blog', 'Careers', 'Press', 'Contact'],
-  Resources: ['Documentation', 'Help Center', 'Community', 'Status', 'Changelog'],
-  Legal: ['Privacy', 'Terms', 'Cookies', 'Licenses'],
+  Product: [
+    { name: 'Features', href: '#' },
+    { name: 'Pricing', href: '#' },
+    { name: 'Demo', href: '#' }
+  ],
+  Company: [
+    { name: 'About', href: '#' },
+    { name: 'Contact', href: 'mailto:debuggerstechs@gmail.com' }
+  ],
+  Resources: [
+    { name: 'Documentation', href: '/docs' },
+    { name: 'Help Center', href: '#' }
+  ],
 }
 
 const socialLinks = [
@@ -17,7 +27,7 @@ const socialLinks = [
 
 export default function Footer() {
   return (
-    <footer className="relative border-t border-white/5">
+    <footer className="relative border-t border-slate-200">
       <div className="max-w-7xl mx-auto px-6 py-20">
         <div className="grid grid-cols-2 md:grid-cols-6 gap-8 mb-16">
           {/* Brand */}
@@ -39,7 +49,7 @@ export default function Footer() {
                   key={social.label}
                   href={social.href}
                   aria-label={social.label}
-                  className="w-10 h-10 rounded-xl bg-white/5 flex items-center justify-center text-slate-500 hover:text-primary hover:bg-primary/10 transition-all duration-200"
+                  className="w-10 h-10 rounded-xl bg-black/5 flex items-center justify-center text-slate-500 hover:text-primary hover:bg-primary/10 transition-all duration-200"
                 >
                   <social.icon className="text-lg" />
                 </a>
@@ -53,13 +63,22 @@ export default function Footer() {
               <h4 className="text-sm font-display font-semibold text-slate-900 mb-4">{category}</h4>
               <ul className="space-y-2.5">
                 {links.map((link) => (
-                  <li key={link}>
-                    <a
-                      href="#"
-                      className="text-sm text-slate-500 hover:text-slate-900 transition-colors duration-200"
-                    >
-                      {link}
-                    </a>
+                  <li key={link.name}>
+                    {link.href.startsWith('/') ? (
+                      <Link
+                        to={link.href}
+                        className="text-sm text-slate-500 hover:text-slate-900 transition-colors duration-200"
+                      >
+                        {link.name}
+                      </Link>
+                    ) : (
+                      <a
+                        href={link.href}
+                        className="text-sm text-slate-500 hover:text-slate-900 transition-colors duration-200"
+                      >
+                        {link.name}
+                      </a>
+                    )}
                   </li>
                 ))}
               </ul>
@@ -68,17 +87,17 @@ export default function Footer() {
         </div>
 
         {/* Bottom Bar */}
-        <div className="pt-8 border-t border-white/5 flex flex-col md:flex-row items-center justify-between gap-4">
+        <div className="pt-8 border-t border-slate-200 flex flex-col md:flex-row items-center justify-between gap-4">
           <p className="text-sm text-slate-500">
             © {new Date().getFullYear()} MenuKit. A product by <a href="https://debuggers.co.in" target="_blank" rel="noopener noreferrer" className="text-slate-900 hover:text-primary transition-colors font-medium">Debuggers</a>. All rights reserved.
           </p>
           <div className="flex items-center gap-6">
-            <a href="#" className="text-sm text-slate-500 hover:text-slate-900 transition-colors">
+            <Link to="/privacy" className="text-sm text-slate-500 hover:text-slate-900 transition-colors">
               Privacy Policy
-            </a>
-            <a href="#" className="text-sm text-slate-500 hover:text-slate-900 transition-colors">
+            </Link>
+            <Link to="/terms" className="text-sm text-slate-500 hover:text-slate-900 transition-colors">
               Terms of Service
-            </a>
+            </Link>
           </div>
         </div>
       </div>

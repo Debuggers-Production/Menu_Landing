@@ -66,7 +66,7 @@ export function LandingPage() {
         <InteractiveShowcase />
         <LiveDemo />
         <Benefits />
-        <Testimonials />
+        {/* <Testimonials /> */}
         <FAQ />
         <FinalCTA />
       </main>

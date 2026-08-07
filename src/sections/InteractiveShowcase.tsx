@@ -1,17 +1,25 @@
 import { useRef } from 'react'
 import { motion, useScroll, useTransform } from 'framer-motion'
-import { IoQrCodeOutline, IoSearchOutline } from 'react-icons/io5'
+import { IoQrCodeOutline, IoSearchOutline, IoRestaurantOutline, IoHandLeftOutline } from 'react-icons/io5'
+import { MdOutlineLocalPizza, MdOutlineLunchDining, MdOutlineSetMeal, MdOutlineCake, MdOutlineLocalDrink, MdOutlineDinnerDining } from 'react-icons/md'
 import SectionWrapper from '../components/SectionWrapper'
 
-const categories = ['🍕 Pizza', '🍔 Burgers', '🥗 Salads', '🍝 Pasta', '🍰 Desserts', '🥤 Drinks']
+const categories = [
+  { name: 'Pizza', Icon: MdOutlineLocalPizza },
+  { name: 'Burgers', Icon: MdOutlineLunchDining },
+  { name: 'Salads', Icon: MdOutlineSetMeal },
+  { name: 'Pasta', Icon: MdOutlineDinnerDining },
+  { name: 'Desserts', Icon: MdOutlineCake },
+  { name: 'Drinks', Icon: MdOutlineLocalDrink }
+]
 
 const menuItems = [
-  { name: 'Margherita Pizza', price: '$12.99', category: 'Pizza', veg: true, emoji: '🍕' },
-  { name: 'Classic Burger', price: '$14.99', category: 'Burgers', veg: false, emoji: '🍔' },
-  { name: 'Caesar Salad', price: '$9.99', category: 'Salads', veg: true, emoji: '🥗' },
-  { name: 'Penne Arrabbiata', price: '$13.99', category: 'Pasta', veg: true, emoji: '🍝' },
-  { name: 'Tiramisu', price: '$8.99', category: 'Desserts', veg: true, emoji: '🍰' },
-  { name: 'BBQ Chicken Wings', price: '$11.99', category: 'Burgers', veg: false, emoji: '🍗' },
+  { name: 'Margherita Pizza', price: '$12.99', category: 'Pizza', veg: true, Icon: MdOutlineLocalPizza },
+  { name: 'Classic Burger', price: '$14.99', category: 'Burgers', veg: false, Icon: MdOutlineLunchDining },
+  { name: 'Caesar Salad', price: '$9.99', category: 'Salads', veg: true, Icon: MdOutlineSetMeal },
+  { name: 'Penne Arrabbiata', price: '$13.99', category: 'Pasta', veg: true, Icon: MdOutlineDinnerDining },
+  { name: 'Tiramisu', price: '$8.99', category: 'Desserts', veg: true, Icon: MdOutlineCake },
+  { name: 'BBQ Chicken Wings', price: '$11.99', category: 'Burgers', veg: false, Icon: MdOutlineLunchDining },
 ]
 
 export default function InteractiveShowcase() {
@@ -69,7 +77,7 @@ export default function InteractiveShowcase() {
               className="relative h-48 bg-gradient-to-br from-primary/30 via-secondary/20 to-bg overflow-hidden"
             >
               <div className="absolute inset-0 bg-grid opacity-20" />
-              <div className="absolute bottom-0 left-0 right-0 h-20 bg-gradient-to-t from-[rgba(255,255,255,0.03)] to-transparent" />
+              <div className="absolute bottom-0 left-0 right-0 h-20 bg-gradient-to-t from-[rgba(0,0,0,0.03)] to-transparent" />
               <div className="absolute bottom-4 left-6 right-6 flex items-end justify-between">
                 <div>
                   <motion.h3
@@ -77,9 +85,9 @@ export default function InteractiveShowcase() {
                     whileInView={{ opacity: 1, y: 0 }}
                     viewport={{ once: true }}
                     transition={{ delay: 0.3 }}
-                    className="text-2xl font-display font-bold text-slate-900"
+                    className="text-2xl font-display font-bold text-slate-900 flex items-center gap-2"
                   >
-                    🍽️ Bella Cucina
+                    <IoRestaurantOutline className="text-primary" /> Bella Cucina
                   </motion.h3>
                   <motion.p
                     initial={{ opacity: 0, y: 10 }}
@@ -96,7 +104,7 @@ export default function InteractiveShowcase() {
                   whileInView={{ opacity: 1, scale: 1 }}
                   viewport={{ once: true }}
                   transition={{ delay: 0.5, type: 'spring' }}
-                  className="w-14 h-14 rounded-2xl bg-white/10 backdrop-blur-sm flex items-center justify-center border border-white/10"
+                  className="w-14 h-14 rounded-2xl bg-black/5 backdrop-blur-sm flex items-center justify-center border border-black/10"
                 >
                   <IoQrCodeOutline className="text-slate-900 text-2xl" />
                 </motion.div>
@@ -109,9 +117,10 @@ export default function InteractiveShowcase() {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ delay: 0.5 }}
-              className="px-6 py-4 bg-primary/5 border-b border-white/5"
+              className="px-6 py-4 bg-primary/5 border-b border-black/5 flex items-center gap-2"
             >
-              <p className="text-sm text-primary">👋 Welcome! Explore our menu and enjoy your meal.</p>
+              <IoHandLeftOutline className="text-primary text-lg shrink-0" />
+              <p className="text-sm text-primary">Welcome! Explore our menu and enjoy your meal.</p>
             </motion.div>
 
             {/* Search Bar */}
@@ -122,7 +131,7 @@ export default function InteractiveShowcase() {
               transition={{ delay: 0.6 }}
               className="px-6 py-4"
             >
-              <div className="flex items-center gap-3 px-4 py-3 rounded-xl bg-white/5 border border-white/10">
+              <div className="flex items-center gap-3 px-4 py-3 rounded-xl bg-black/5 border border-black/10">
                 <IoSearchOutline className="text-slate-500" />
                 <span className="text-sm text-slate-500">Search for dishes...</span>
               </div>
@@ -143,13 +152,13 @@ export default function InteractiveShowcase() {
                   whileInView={{ opacity: 1, scale: 1 }}
                   viewport={{ once: true }}
                   transition={{ delay: 0.7 + i * 0.05 }}
-                  className={`px-4 py-2 rounded-full text-sm whitespace-nowrap transition-all ${
+                  className={`px-4 py-2 rounded-full text-sm whitespace-nowrap transition-all flex items-center gap-1.5 ${
                     i === 0
                       ? 'bg-primary text-slate-900 font-medium'
-                      : 'bg-white/5 text-slate-500 hover:bg-white/10'
+                      : 'bg-black/5 text-slate-500 hover:bg-black/10'
                   }`}
                 >
-                  {cat}
+                  <cat.Icon className={i === 0 ? "text-slate-900" : "text-slate-500"} /> {cat.name}
                 </motion.button>
               ))}
             </motion.div>
@@ -163,10 +172,10 @@ export default function InteractiveShowcase() {
                   whileInView={{ opacity: 1, y: 0 }}
                   viewport={{ once: true }}
                   transition={{ delay: 0.9 + i * 0.08 }}
-                  className="flex items-center justify-between p-4 rounded-xl bg-white/[0.02] border border-white/5 hover:bg-white/[0.05] hover:border-white/10 transition-all group"
+                  className="flex items-center justify-between p-4 rounded-xl bg-black/[0.02] border border-black/5 hover:bg-black/[0.05] hover:border-black/10 transition-all group"
                 >
                   <div className="flex items-center gap-3">
-                    <span className="text-2xl">{item.emoji}</span>
+                    <span className="text-xl text-slate-400 p-2 bg-black/5 rounded-lg border border-black/5"><item.Icon /></span>
                     <div>
                       <p className="text-sm font-medium text-slate-900 group-hover:text-primary transition-colors">
                         {item.name}

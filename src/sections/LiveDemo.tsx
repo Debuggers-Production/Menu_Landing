@@ -1,46 +1,47 @@
 import { useState } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
-import { IoSearchOutline, IoChevronBack } from 'react-icons/io5'
+import { IoSearchOutline, IoChevronBack, IoRestaurantOutline } from 'react-icons/io5'
+import { MdOutlineLocalPizza, MdOutlineLunchDining, MdOutlineSetMeal, MdOutlineCake, MdOutlineLocalDrink } from 'react-icons/md'
 import SectionWrapper from '../components/SectionWrapper'
 
 const demoCategories = [
-  { name: 'All', emoji: '🍽️' },
-  { name: 'Pizza', emoji: '🍕' },
-  { name: 'Burgers', emoji: '🍔' },
-  { name: 'Salads', emoji: '🥗' },
-  { name: 'Drinks', emoji: '🥤' },
-  { name: 'Desserts', emoji: '🍰' },
+  { name: 'All', Icon: IoRestaurantOutline },
+  { name: 'Pizza', Icon: MdOutlineLocalPizza },
+  { name: 'Burgers', Icon: MdOutlineLunchDining },
+  { name: 'Salads', Icon: MdOutlineSetMeal },
+  { name: 'Drinks', Icon: MdOutlineLocalDrink },
+  { name: 'Desserts', Icon: MdOutlineCake },
 ]
 
-const demoItems: Record<string, Array<{ name: string; price: string; desc: string; veg: boolean; emoji: string }>> = {
+const demoItems: Record<string, Array<{ name: string; price: string; desc: string; veg: boolean; Icon: any }>> = {
   All: [
-    { name: 'Margherita Pizza', price: '$12.99', desc: 'Fresh mozzarella, basil, tomato sauce', veg: true, emoji: '🍕' },
-    { name: 'Classic Burger', price: '$14.99', desc: 'Angus beef, lettuce, tomato, cheese', veg: false, emoji: '🍔' },
-    { name: 'Greek Salad', price: '$9.99', desc: 'Feta cheese, olives, fresh vegetables', veg: true, emoji: '🥗' },
-    { name: 'Iced Latte', price: '$5.99', desc: 'Smooth espresso with cold milk', veg: true, emoji: '☕' },
+    { name: 'Margherita Pizza', price: '$12.99', desc: 'Fresh mozzarella, basil, tomato sauce', veg: true, Icon: MdOutlineLocalPizza },
+    { name: 'Classic Burger', price: '$14.99', desc: 'Angus beef, lettuce, tomato, cheese', veg: false, Icon: MdOutlineLunchDining },
+    { name: 'Greek Salad', price: '$9.99', desc: 'Feta cheese, olives, fresh vegetables', veg: true, Icon: MdOutlineSetMeal },
+    { name: 'Iced Latte', price: '$5.99', desc: 'Smooth espresso with cold milk', veg: true, Icon: MdOutlineLocalDrink },
   ],
   Pizza: [
-    { name: 'Margherita Pizza', price: '$12.99', desc: 'Fresh mozzarella, basil, tomato sauce', veg: true, emoji: '🍕' },
-    { name: 'Pepperoni Pizza', price: '$14.99', desc: 'Loaded pepperoni with mozzarella', veg: false, emoji: '🍕' },
-    { name: 'Veggie Supreme', price: '$13.99', desc: 'Bell peppers, mushrooms, olives', veg: true, emoji: '🍕' },
+    { name: 'Margherita Pizza', price: '$12.99', desc: 'Fresh mozzarella, basil, tomato sauce', veg: true, Icon: MdOutlineLocalPizza },
+    { name: 'Pepperoni Pizza', price: '$14.99', desc: 'Loaded pepperoni with mozzarella', veg: false, Icon: MdOutlineLocalPizza },
+    { name: 'Veggie Supreme', price: '$13.99', desc: 'Bell peppers, mushrooms, olives', veg: true, Icon: MdOutlineLocalPizza },
   ],
   Burgers: [
-    { name: 'Classic Burger', price: '$14.99', desc: 'Angus beef, lettuce, tomato, cheese', veg: false, emoji: '🍔' },
-    { name: 'Veggie Burger', price: '$12.99', desc: 'Plant-based patty with avocado', veg: true, emoji: '🍔' },
-    { name: 'BBQ Bacon Burger', price: '$16.99', desc: 'Crispy bacon, BBQ sauce, cheddar', veg: false, emoji: '🍔' },
+    { name: 'Classic Burger', price: '$14.99', desc: 'Angus beef, lettuce, tomato, cheese', veg: false, Icon: MdOutlineLunchDining },
+    { name: 'Veggie Burger', price: '$12.99', desc: 'Plant-based patty with avocado', veg: true, Icon: MdOutlineLunchDining },
+    { name: 'BBQ Bacon Burger', price: '$16.99', desc: 'Crispy bacon, BBQ sauce, cheddar', veg: false, Icon: MdOutlineLunchDining },
   ],
   Salads: [
-    { name: 'Greek Salad', price: '$9.99', desc: 'Feta cheese, olives, fresh vegetables', veg: true, emoji: '🥗' },
-    { name: 'Caesar Salad', price: '$10.99', desc: 'Romaine, parmesan, croutons', veg: true, emoji: '🥗' },
+    { name: 'Greek Salad', price: '$9.99', desc: 'Feta cheese, olives, fresh vegetables', veg: true, Icon: MdOutlineSetMeal },
+    { name: 'Caesar Salad', price: '$10.99', desc: 'Romaine, parmesan, croutons', veg: true, Icon: MdOutlineSetMeal },
   ],
   Drinks: [
-    { name: 'Iced Latte', price: '$5.99', desc: 'Smooth espresso with cold milk', veg: true, emoji: '☕' },
-    { name: 'Fresh Orange Juice', price: '$4.99', desc: 'Freshly squeezed oranges', veg: true, emoji: '🍊' },
-    { name: 'Mango Smoothie', price: '$6.99', desc: 'Fresh mango with yogurt', veg: true, emoji: '🥭' },
+    { name: 'Iced Latte', price: '$5.99', desc: 'Smooth espresso with cold milk', veg: true, Icon: MdOutlineLocalDrink },
+    { name: 'Fresh Orange Juice', price: '$4.99', desc: 'Freshly squeezed oranges', veg: true, Icon: MdOutlineLocalDrink },
+    { name: 'Mango Smoothie', price: '$6.99', desc: 'Fresh mango with yogurt', veg: true, Icon: MdOutlineLocalDrink },
   ],
   Desserts: [
-    { name: 'Tiramisu', price: '$8.99', desc: 'Classic Italian coffee dessert', veg: true, emoji: '🍰' },
-    { name: 'Chocolate Lava Cake', price: '$9.99', desc: 'Warm chocolate with vanilla ice cream', veg: true, emoji: '🍫' },
+    { name: 'Tiramisu', price: '$8.99', desc: 'Classic Italian coffee dessert', veg: true, Icon: MdOutlineCake },
+    { name: 'Chocolate Lava Cake', price: '$9.99', desc: 'Warm chocolate with vanilla ice cream', veg: true, Icon: MdOutlineCake },
   ],
 }
 
@@ -124,15 +125,15 @@ export default function LiveDemo() {
                 <div className="flex items-center justify-between px-6 pt-3 pb-2">
                   <span className="text-[10px] text-slate-900/50 font-medium">9:41</span>
                   <div className="flex items-center gap-1">
-                    <div className="w-3.5 h-2 rounded-sm bg-white/50" />
-                    <div className="w-4 h-2 rounded-sm border border-white/50 relative">
+                    <div className="w-3.5 h-2 rounded-sm bg-black/50" />
+                    <div className="w-4 h-2 rounded-sm border border-black/50 relative">
                       <div className="absolute inset-[1px] right-[2px] bg-green-400 rounded-[1px]" />
                     </div>
                   </div>
                 </div>
 
                 {/* Notch */}
-                <div className="absolute top-0 left-1/2 -translate-x-1/2 w-[120px] h-[30px] bg-whitelack rounded-b-2xl" />
+                <div className="absolute top-0 left-1/2 -translate-x-1/2 w-[120px] h-[30px] bg-black rounded-b-2xl" />
 
                 <AnimatePresence mode="wait">
                   {selectedItem ? (
@@ -152,7 +153,7 @@ export default function LiveDemo() {
                         <IoChevronBack /> Back
                       </button>
                       <div className="text-center mb-6">
-                        <span className="text-6xl mb-4 block">{selectedItem.emoji}</span>
+                        <span className="text-6xl mb-4 flex justify-center text-slate-300"><selectedItem.Icon /></span>
                         <h3 className="text-xl font-display font-bold text-slate-900 mb-1">
                           {selectedItem.name}
                         </h3>
@@ -178,14 +179,14 @@ export default function LiveDemo() {
                       transition={{ duration: 0.3 }}
                     >
                       {/* Header */}
-                      <div className="px-4 py-3 border-b border-white/5">
-                        <h3 className="text-lg font-display font-bold text-slate-900">🍽️ Bella Cucina</h3>
+                      <div className="px-4 py-3 border-b border-black/5">
+                        <h3 className="text-lg font-display font-bold text-slate-900 flex items-center gap-1.5"><IoRestaurantOutline className="text-primary"/> Bella Cucina</h3>
                         <p className="text-[10px] text-slate-500">Open now · Italian Restaurant</p>
                       </div>
 
                       {/* Search */}
                       <div className="px-4 py-3">
-                        <div className="flex items-center gap-2 px-3 py-2 rounded-lg bg-white/5 border border-white/10">
+                        <div className="flex items-center gap-2 px-3 py-2 rounded-lg bg-black/5 border border-black/10">
                           <IoSearchOutline className="text-slate-500 text-sm" />
                           <input
                             type="text"
@@ -206,14 +207,14 @@ export default function LiveDemo() {
                               setActiveCategory(cat.name)
                               setSearchQuery('')
                             }}
-                            className={`px-3 py-1.5 rounded-full text-[11px] whitespace-nowrap transition-all ${
-                              activeCategory === cat.name
-                                ? 'bg-primary text-slate-900 font-medium'
-                                : 'bg-white/5 text-slate-500 hover:bg-white/10'
-                            }`}
-                          >
-                            {cat.emoji} {cat.name}
-                          </button>
+                              className={`px-3 py-1.5 rounded-full text-[11px] whitespace-nowrap transition-all flex items-center gap-1 ${
+                                activeCategory === cat.name
+                                  ? 'bg-primary text-slate-900 font-medium'
+                                  : 'bg-black/5 text-slate-500 hover:bg-black/10'
+                              }`}
+                            >
+                              <cat.Icon className={activeCategory === cat.name ? "text-slate-900" : "text-slate-500"} /> {cat.name}
+                            </button>
                         ))}
                       </div>
 
@@ -229,9 +230,9 @@ export default function LiveDemo() {
                               exit={{ opacity: 0, scale: 0.9 }}
                               transition={{ delay: i * 0.05, duration: 0.3 }}
                               onClick={() => setSelectedItem(item)}
-                              className="w-full flex items-center gap-3 p-3 rounded-xl bg-white/[0.02] border border-white/5 hover:bg-white/[0.05] transition-all text-left"
+                              className="w-full flex items-center gap-3 p-3 rounded-xl bg-black/[0.02] border border-black/5 hover:bg-black/[0.05] transition-all text-left"
                             >
-                              <span className="text-2xl">{item.emoji}</span>
+                              <span className="text-2xl text-slate-400 p-2 bg-black/5 rounded-lg border border-black/5"><item.Icon /></span>
                               <div className="flex-1 min-w-0">
                                 <p className="text-xs font-medium text-slate-900 truncate">{item.name}</p>
                                 <p className="text-[10px] text-slate-500 truncate">{item.desc}</p>

@@ -31,7 +31,7 @@ export default function Navbar() {
         transition={{ duration: 0.8, ease: [0.22, 1, 0.36, 1] }}
         className={`fixed top-0 left-0 right-0 z-50 transition-all duration-500 ${
           scrolled
-            ? 'bg-whiteg/80 backdrop-blur-xl border-b border-white/5'
+            ? 'bg-white/80 backdrop-blur-xl border-b border-slate-200'
             : 'bg-transparent'
         }`}
       >
@@ -62,7 +62,7 @@ export default function Navbar() {
                   <a
                     key={link.label}
                     href={link.href}
-                    className="px-4 py-2 text-sm text-slate-500 hover:text-slate-900 transition-colors duration-200 rounded-lg hover:bg-white/5"
+                    className="px-4 py-2 text-sm text-slate-500 hover:text-slate-900 transition-colors duration-200 rounded-lg hover:bg-black/5"
                   >
                     {link.label}
                   </a>
@@ -97,7 +97,7 @@ export default function Navbar() {
             animate={{ opacity: 1, y: 0 }}
             exit={{ opacity: 0, y: -20 }}
             transition={{ duration: 0.3 }}
-            className="fixed inset-0 z-40 bg-whiteg/95 backdrop-blur-xl pt-24 px-6 md:hidden"
+            className="fixed inset-0 z-40 bg-white/95 backdrop-blur-xl pt-24 px-6 md:hidden"
           >
             <div className="flex flex-col gap-2">
               {navLinks.map((link) => (
@@ -106,7 +106,7 @@ export default function Navbar() {
                     key={link.label}
                     to={link.href}
                     onClick={() => setMobileOpen(false)}
-                    className="text-lg font-bold text-primary hover:text-orange-400 transition-colors py-3 border-b border-white/5"
+                    className="text-lg font-bold text-primary hover:text-orange-400 transition-colors py-3 border-b border-slate-200"
                   >
                     {link.label}
                   </Link>
@@ -115,7 +115,7 @@ export default function Navbar() {
                     key={link.label}
                     href={link.href}
                     onClick={() => setMobileOpen(false)}
-                    className="text-lg text-slate-500 hover:text-slate-900 transition-colors py-3 border-b border-white/5"
+                    className="text-lg text-slate-500 hover:text-slate-900 transition-colors py-3 border-b border-slate-200"
                   >
                     {link.label}
                   </a>

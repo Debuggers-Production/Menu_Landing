@@ -6,6 +6,7 @@ import { HiOutlinePlay } from 'react-icons/hi'
 import { IoQrCodeOutline, IoRestaurantOutline, IoFastFoodOutline } from 'react-icons/io5'
 import { BiFoodMenu } from 'react-icons/bi'
 import { MdOutlineDeliveryDining } from 'react-icons/md'
+import { MdOutlineLocalPizza, MdOutlineLunchDining, MdOutlineSetMeal } from 'react-icons/md'
 
 const floatingCards = [
   { icon: IoQrCodeOutline, label: 'QR Menu', color: 'from-primary to-secondary', x: '8%', y: '20%', delay: 0 },
@@ -74,7 +75,7 @@ export default function Hero() {
             style={{ left: card.x, top: card.y }}
           >
             <div
-              className="glass-card p-4 flex items-center gap-3 cursor-default hover:bg-white/8 transition-colors animate-float-card"
+              className="glass-card p-4 flex items-center gap-3 cursor-default hover:bg-white/40 transition-colors animate-float-card"
               style={{ animationDuration: `${5 + i * 0.5}s` }}
             >
               <div className={`w-10 h-10 rounded-xl bg-gradient-to-br ${card.color} flex items-center justify-center`}>
@@ -158,16 +159,16 @@ export default function Hero() {
         >
           <div className="absolute -inset-4 bg-gradient-to-r from-primary/20 via-secondary/10 to-primary/20 rounded-3xl blur-2xl" />
           <div className="relative glass-card p-2 orange-glow">
-            <div className="bg-[#111111] rounded-2xl overflow-hidden">
+            <div className="bg-white rounded-2xl overflow-hidden shadow-lg border border-black/5">
               {/* Mockup Header */}
-              <div className="flex items-center gap-2 px-4 py-3 border-b border-white/5">
+              <div className="flex items-center gap-2 px-4 py-3 border-b border-black/5">
                 <div className="flex gap-1.5">
                   <div className="w-3 h-3 rounded-full bg-red-500/80" />
                   <div className="w-3 h-3 rounded-full bg-yellow-500/80" />
                   <div className="w-3 h-3 rounded-full bg-green-500/80" />
                 </div>
                 <div className="flex-1 flex justify-center">
-                  <div className="px-4 py-1 rounded-lg bg-white/5 text-xs text-slate-500">
+                  <div className="px-4 py-1 rounded-lg bg-black/5 text-xs text-slate-500">
                     menukit.debuggers.co.in
                   </div>
                 </div>
@@ -178,14 +179,14 @@ export default function Hero() {
                 {/* Top Bar */}
                 <div className="flex items-center justify-between mb-6">
                   <div>
-                    <div className="h-4 w-40 bg-white/10 rounded mb-2" />
-                    <div className="h-3 w-24 bg-white/5 rounded" />
+                    <div className="h-4 w-40 bg-black/10 rounded mb-2" />
+                    <div className="h-3 w-24 bg-black/5 rounded" />
                   </div>
                   <div className="flex gap-2">
                     <div className="px-3 py-1.5 rounded-lg bg-primary/20 text-primary text-xs font-medium">
                       + Add Item
                     </div>
-                    <div className="px-3 py-1.5 rounded-lg bg-white/5 text-xs text-slate-500">
+                    <div className="px-3 py-1.5 rounded-lg bg-black/5 text-xs text-slate-500">
                       Preview
                     </div>
                   </div>
@@ -204,7 +205,7 @@ export default function Hero() {
                       initial={{ opacity: 0, y: 20 }}
                       animate={{ opacity: 1, y: 0 }}
                       transition={{ delay: 2.2 + i * 0.1 }}
-                      className="p-3 rounded-xl bg-white/[0.03] border border-white/5"
+                      className="p-3 rounded-xl bg-black/[0.03] border border-black/5"
                     >
                       <p className="text-[10px] text-slate-500 mb-1">{stat.label}</p>
                       <p className="text-lg font-semibold text-slate-900">{stat.value}</p>
@@ -215,16 +216,22 @@ export default function Hero() {
 
                 {/* Menu Items */}
                 <div className="space-y-2">
-                  {['🍕 Margherita Pizza', '🍔 Classic Burger', '🥗 Caesar Salad'].map(
+                  {[
+                    { name: 'Margherita Pizza', Icon: MdOutlineLocalPizza },
+                    { name: 'Classic Burger', Icon: MdOutlineLunchDining },
+                    { name: 'Caesar Salad', Icon: MdOutlineSetMeal }
+                  ].map(
                     (item, i) => (
                       <motion.div
                         key={i}
                         initial={{ opacity: 0, x: -20 }}
                         animate={{ opacity: 1, x: 0 }}
                         transition={{ delay: 2.6 + i * 0.1 }}
-                        className="flex items-center justify-between p-3 rounded-xl bg-white/[0.02] border border-white/5"
+                        className="flex items-center justify-between p-3 rounded-xl bg-black/[0.02] border border-black/5"
                       >
-                        <span className="text-sm text-slate-900/80">{item}</span>
+                        <span className="text-sm text-slate-900/80 flex items-center gap-2">
+                          <item.Icon className="text-slate-400 text-lg" /> {item.name}
+                        </span>
                         <div className="flex items-center gap-3">
                           <span className="text-sm text-primary font-medium">$12.99</span>
                           <div className="w-8 h-4 rounded-full bg-primary/30 relative">
@@ -249,7 +256,7 @@ export default function Hero() {
         >
           <span className="text-xs text-slate-500">Scroll to explore</span>
           <div
-            className="w-6 h-10 rounded-full border border-white/20 flex items-start justify-center pt-2 animate-[scroll-bounce_1.5s_infinite]"
+            className="w-6 h-10 rounded-full border border-black/20 flex items-start justify-center pt-2 animate-[scroll-bounce_1.5s_infinite]"
           >
             <div className="w-1 h-2 rounded-full bg-primary" />
           </div>

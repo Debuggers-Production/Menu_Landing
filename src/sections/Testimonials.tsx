@@ -125,7 +125,7 @@ export default function Testimonials() {
                 className={`transition-all duration-300 rounded-full ${
                   i === active
                     ? 'w-8 h-2 bg-primary'
-                    : 'w-2 h-2 bg-white/20 hover:bg-white/40'
+                    : 'w-2 h-2 bg-black/20 hover:bg-black/40'
                 }`}
                 aria-label={`Go to testimonial ${i + 1}`}
               />

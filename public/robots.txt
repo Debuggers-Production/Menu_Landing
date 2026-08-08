@@ -1,4 +1,4 @@
 User-agent: *
 Allow: /
 
-Sitemap: https://menukit.debuggers.co.in/landing/sitemap.xml
+Sitemap: https://debuggerstechnologies.com/menukit/sitemap.xml

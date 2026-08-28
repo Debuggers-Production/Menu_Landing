@@ -10,7 +10,7 @@ const footerLinks = {
   ],
   Company: [
     { name: 'About', href: '#' },
-    { name: 'Contact', href: 'mailto:debuggerstechs@gmail.com' }
+    { name: 'Contact Support', href: '/contact' }
   ],
   Resources: [
     { name: 'Documentation', href: '/docs' },

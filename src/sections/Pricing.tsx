@@ -2,6 +2,7 @@ import { useState, useMemo, useRef } from 'react'
 import { motion, useInView } from 'framer-motion'
 import { Check, ShoppingCart, Sparkles, Zap, PackageOpen, Award, Layers, ShieldCheck, ArrowRight, HelpCircle } from 'lucide-react';
 import SectionWrapper from '../components/SectionWrapper'
+import logo from '../assets/menukit-logo.svg'
 
 function cn(...classes: (string | undefined | null | false)[]) {
   return classes.filter(Boolean).join(' ');
@@ -166,7 +167,7 @@ export default function Pricing() {
           className="text-center mb-8 sm:mb-12"
         >
           <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-orange-50 border border-orange-200 text-primary text-[11px] font-bold uppercase tracking-wider mb-3">
-            <Sparkles size={12} className="animate-pulse" /> Add-On Marketplace
+            <img src={logo} alt="MenuKit Logo" className="w-4 h-4" /> Add-On Marketplace
           </div>
           <h2 className="text-3xl sm:text-5xl font-black tracking-tight text-slate-900 mb-3">
             Build Your <span className="bg-gradient-to-r from-primary via-orange-500 to-orange-500 bg-clip-text text-transparent">Custom Plan</span>

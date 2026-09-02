@@ -1,12 +1,13 @@
 import { useEffect, useRef } from 'react'
 import { APP_CONFIG } from '../config'
-import { motion, useScroll, useTransform } from 'framer-motion'
+import { motion } from 'framer-motion'
 import { gsap } from 'gsap'
 import { HiOutlinePlay } from 'react-icons/hi'
 import { IoQrCodeOutline, IoRestaurantOutline, IoFastFoodOutline } from 'react-icons/io5'
 import { BiFoodMenu } from 'react-icons/bi'
 import { MdOutlineDeliveryDining } from 'react-icons/md'
-import { MdOutlineLocalPizza, MdOutlineLunchDining, MdOutlineSetMeal } from 'react-icons/md'
+import heroMerchantDesktop from '../assets/hero-merchant-desktop.png'
+import heroCustomerMobile from '../assets/hero-customer-mobile.jpg'
 
 const floatingCards = [
   { icon: IoQrCodeOutline, label: 'QR Menu', color: 'from-primary to-secondary', x: '8%', y: '20%', delay: 0 },
@@ -20,15 +21,6 @@ export default function Hero() {
   const containerRef = useRef<HTMLDivElement>(null)
   const headlineRef = useRef<HTMLHeadingElement>(null)
 
-  const { scrollYProgress } = useScroll({
-    target: containerRef,
-    offset: ['start start', 'end start'],
-  })
-
-  const heroScale = useTransform(scrollYProgress, [0, 1], [1, 0.85])
-  const heroOpacity = useTransform(scrollYProgress, [0, 0.5], [1, 0])
-  const heroY = useTransform(scrollYProgress, [0, 1], [0, 150])
-
   useEffect(() => {
     if (!headlineRef.current) return
 
@@ -36,23 +28,22 @@ export default function Hero() {
     const words = headlineRef.current.querySelectorAll('.word')
     gsap.fromTo(
       words,
-      { y: 80, opacity: 0, rotateX: -40 },
+      { y: 60, opacity: 0, rotateX: -30 },
       {
         y: 0,
         opacity: 1,
         rotateX: 0,
-        duration: 1,
-        stagger: 0.08,
+        duration: 0.8,
+        stagger: 0.06,
         ease: 'power3.out',
-        delay: 0.3,
+        delay: 0.2,
       }
     )
   }, [])
 
   return (
-    <motion.div
+    <div
       ref={containerRef}
-      style={{ scale: heroScale, opacity: heroOpacity, y: heroY }}
       className="relative min-h-screen flex items-center justify-center overflow-hidden"
     >
       {/* Animated Mesh Background */}
@@ -139,100 +130,58 @@ export default function Hero() {
           </button>
         </motion.div>
 
-        {/* Dashboard Mockup */}
+        {/* Authentic Multi-Device Showcase (Direct Desktop & Mobile Screenshots) */}
         <motion.div
-          initial={{ opacity: 0, y: 60, scale: 0.9 }}
+          initial={{ opacity: 0, y: 60, scale: 0.95 }}
           animate={{ opacity: 1, y: 0, scale: 1 }}
           transition={{ delay: 1.8, duration: 1, ease: [0.22, 1, 0.36, 1] }}
-          className="mt-20 relative max-w-4xl mx-auto"
+          className="mt-16 relative max-w-6xl mx-auto"
         >
-          <div className="absolute -inset-4 bg-gradient-to-r from-primary/20 via-secondary/10 to-primary/20 rounded-3xl blur-2xl" />
-          <div className="relative glass-card p-2 orange-glow">
-            <div className="bg-white rounded-2xl overflow-hidden shadow-lg border border-black/5">
-              {/* Mockup Header */}
-              <div className="flex items-center gap-2 px-4 py-3 border-b border-black/5">
-                <div className="flex gap-1.5">
-                  <div className="w-3 h-3 rounded-full bg-red-500/80" />
-                  <div className="w-3 h-3 rounded-full bg-yellow-500/80" />
-                  <div className="w-3 h-3 rounded-full bg-green-500/80" />
+          {/* Ambient Glow */}
+          <div className="absolute -inset-6 bg-gradient-to-r from-primary/30 via-orange-500/20 to-primary/30 rounded-[40px] blur-3xl opacity-70 pointer-events-none" />
+
+          <div className="relative">
+            {/* 1. DESKTOP MERCHANT DASHBOARD IMAGE CONTAINER */}
+            <div className="bg-white rounded-2xl md:rounded-3xl overflow-hidden shadow-2xl border border-slate-200/80 text-left">
+              {/* Browser Window Header */}
+              <div className="flex items-center justify-between px-4 py-3 bg-slate-100/90 border-b border-slate-200">
+                <div className="flex items-center gap-2">
+                  <div className="w-3 h-3 rounded-full bg-red-400" />
+                  <div className="w-3 h-3 rounded-full bg-amber-400" />
+                  <div className="w-3 h-3 rounded-full bg-emerald-400" />
                 </div>
-                <div className="flex-1 flex justify-center">
-                  <div className="px-4 py-1 rounded-lg bg-black/5 text-xs text-slate-500">
-                    menukit.debuggers.co.in
-                  </div>
+                <div className="px-4 py-1 rounded-full bg-white border border-slate-200 text-xs font-medium text-slate-500 flex items-center gap-2 shadow-xs">
+                  <span className="w-2 h-2 rounded-full bg-emerald-500 animate-pulse" />
+                  menukit.debuggerstechnologies.com/dashboard
                 </div>
+                <div className="w-12" />
               </div>
 
-              {/* Mockup Body */}
-              <div className="p-6 min-h-[300px] md:min-h-[400px]">
-                {/* Top Bar */}
-                <div className="flex items-center justify-between mb-6">
-                  <div>
-                    <div className="h-4 w-40 bg-black/10 rounded mb-2" />
-                    <div className="h-3 w-24 bg-black/5 rounded" />
-                  </div>
-                  <div className="flex gap-2">
-                    <div className="px-3 py-1.5 rounded-lg bg-primary/20 text-primary text-xs font-medium">
-                      + Add Item
-                    </div>
-                    <div className="px-3 py-1.5 rounded-lg bg-black/5 text-xs text-slate-500">
-                      Preview
-                    </div>
-                  </div>
-                </div>
-
-                {/* Stats */}
-                <div className="grid grid-cols-2 md:grid-cols-4 gap-3 mb-6">
-                  {[
-                    { label: 'Total Scans', value: '2,847', trend: '+12%' },
-                    { label: 'Menu Items', value: '48', trend: '+3' },
-                    { label: 'Active QRs', value: '12', trend: '100%' },
-                    { label: 'Avg. Time', value: '3.2m', trend: '+8%' },
-                  ].map((stat, i) => (
-                    <motion.div
-                      key={i}
-                      initial={{ opacity: 0, y: 20 }}
-                      animate={{ opacity: 1, y: 0 }}
-                      transition={{ delay: 2.2 + i * 0.1 }}
-                      className="p-3 rounded-xl bg-black/[0.03] border border-black/5"
-                    >
-                      <p className="text-[10px] text-slate-500 mb-1">{stat.label}</p>
-                      <p className="text-lg font-semibold text-slate-900">{stat.value}</p>
-                      <p className="text-[10px] text-green-400">{stat.trend}</p>
-                    </motion.div>
-                  ))}
-                </div>
-
-                {/* Menu Items */}
-                <div className="space-y-2">
-                  {[
-                    { name: 'Margherita Pizza', Icon: MdOutlineLocalPizza },
-                    { name: 'Classic Burger', Icon: MdOutlineLunchDining },
-                    { name: 'Caesar Salad', Icon: MdOutlineSetMeal }
-                  ].map(
-                    (item, i) => (
-                      <motion.div
-                        key={i}
-                        initial={{ opacity: 0, x: -20 }}
-                        animate={{ opacity: 1, x: 0 }}
-                        transition={{ delay: 2.6 + i * 0.1 }}
-                        className="flex items-center justify-between p-3 rounded-xl bg-black/[0.02] border border-black/5"
-                      >
-                        <span className="text-sm text-slate-900/80 flex items-center gap-2">
-                          <item.Icon className="text-slate-400 text-lg" /> {item.name}
-                        </span>
-                        <div className="flex items-center gap-3">
-                          <span className="text-sm text-primary font-medium">$12.99</span>
-                          <div className="w-8 h-4 rounded-full bg-primary/30 relative">
-                            <div className="absolute right-0.5 top-0.5 w-3 h-3 rounded-full bg-primary" />
-                          </div>
-                        </div>
-                      </motion.div>
-                    )
-                  )}
-                </div>
+              {/* Direct Desktop Portal Image */}
+              <div className="w-full bg-[#F8FAFC] overflow-hidden">
+                <img 
+                  src={heroMerchantDesktop} 
+                  alt="MenuKit Merchant Portal Dashboard" 
+                  className="w-full h-auto object-cover block"
+                />
               </div>
             </div>
+
+            {/* 2. FLOATING REAL MOBILE PUBLIC MENU VIEW (Customer Experience) */}
+            <motion.div
+              initial={{ opacity: 0, x: 40, y: 30 }}
+              animate={{ opacity: 1, x: 0, y: 0 }}
+              transition={{ delay: 2.2, duration: 0.8 }}
+              className="absolute -bottom-8 -right-2 sm:-right-4 md:right-6 w-[260px] sm:w-[290px] md:w-[320px] rounded-[36px] bg-slate-900 p-2.5 shadow-2xl border-4 border-white hidden sm:block z-30"
+            >
+              <div className="bg-[#F8FAFC] rounded-[28px] overflow-hidden text-left flex flex-col shadow-inner aspect-[9/19]">
+                <img 
+                  src={heroCustomerMobile} 
+                  alt="MenuKit Public Mobile Menu View" 
+                  className="w-full h-full object-cover block"
+                />
+              </div>
+            </motion.div>
           </div>
         </motion.div>
 
@@ -251,6 +200,7 @@ export default function Hero() {
           </div>
         </motion.div>
       </div>
-    </motion.div>
+    </div>
   )
 }
+

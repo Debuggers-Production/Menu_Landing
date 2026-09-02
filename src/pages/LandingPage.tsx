@@ -8,7 +8,6 @@ import Hero from '../sections/Hero'
 import Problem from '../sections/Problem'
 import HowItWorks from '../sections/HowItWorks'
 import Features from '../sections/Features'
-import InteractiveShowcase from '../sections/InteractiveShowcase'
 import LiveDemo from '../sections/LiveDemo'
 import Benefits from '../sections/Benefits'
 // import Testimonials from '../sections/Testimonials'
@@ -25,26 +24,27 @@ export function LandingPage() {
 
   useEffect(() => {
     const lenis = new Lenis({
-      duration: 1.2,
+      duration: 0.8,
       easing: (t: number) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
+      orientation: 'vertical',
+      gestureOrientation: 'vertical',
       smoothWheel: true,
+      wheelMultiplier: 1.1,
+      touchMultiplier: 1.5,
     })
     lenisRef.current = lenis
 
-    function raf(time: number) {
-      lenis.raf(time)
-      requestAnimationFrame(raf)
-    }
-    requestAnimationFrame(raf)
-
-    // Sync Lenis with GSAP ScrollTrigger
     lenis.on('scroll', ScrollTrigger.update)
-    gsap.ticker.add((time) => {
+
+    const updateTicker = (time: number) => {
       lenis.raf(time * 1000)
-    })
-    gsap.ticker.lagSmoothing(0)
+    }
+
+    gsap.ticker.add(updateTicker)
+    gsap.ticker.lagSmoothing(500, 33)
 
     return () => {
+      gsap.ticker.remove(updateTicker)
       lenis.destroy()
     }
   }, [])
@@ -63,7 +63,6 @@ export function LandingPage() {
         <Pricing />
         <Problem />
         <HowItWorks />
-        <InteractiveShowcase />
         <LiveDemo />
         <Benefits />
         {/* <Testimonials /> */}

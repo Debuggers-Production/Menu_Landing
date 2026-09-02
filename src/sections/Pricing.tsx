@@ -1,82 +1,34 @@
 import { useState, useMemo, useRef } from 'react'
-import { motion, useInView } from 'framer-motion'
-import { Check, ShoppingCart, Sparkles, Zap, PackageOpen, Award, Layers, ShieldCheck, ArrowRight, HelpCircle } from 'lucide-react';
+import { motion, useInView, AnimatePresence } from 'framer-motion'
+import { Check, ShoppingCart, Sparkles, Zap, PackageOpen, Award, Layers, ShieldCheck, ArrowRight, HelpCircle, ChevronDown } from 'lucide-react';
 import SectionWrapper from '../components/SectionWrapper'
 import logo from '../assets/menukit-logo.svg'
+import { useGlobalPricing } from '../hooks/useGlobalPricing'
+import { CountryFlag } from '../components/CountryFlag'
 
 function cn(...classes: (string | undefined | null | false)[]) {
   return classes.filter(Boolean).join(' ');
 }
 
-interface Feature {
-  id: string;
-  name: string;
-  price: number;
-  description: string;
-  category: string;
-}
-
-const ADDONS: Feature[] = [
-  {
-    id: 'online-orders',
-    name: 'Online Visibility & Orders Accept',
-    price: 129,
-    description: 'Accept online delivery & takeaway orders directly with live online menu visibility.',
-    category: 'Online Ordering',
-  },
-  {
-    id: 'member-count',
-    name: 'New Member Count',
-    price: 99,
-    description: 'Track how many new members/customers join every month seamlessly.',
-    category: 'Relationship Marketing',
-  },
-  {
-    id: 'member-details',
-    name: 'New Member + Details',
-    price: 129,
-    description: 'Store and manage deep customer information along with member growth metrics.',
-    category: 'Relationship Marketing',
-  },
-  {
-    id: 'search-data',
-    name: 'Customer Search Data',
-    price: 69,
-    description: 'Access search analytics and real-time customer interest insights.',
-    category: 'Marketing',
-  },
-  {
-    id: 'custom-theme',
-    name: 'Custom Theme Studio',
-    price: 69,
-    description: 'Customize colors, logos, and custom branding of your digital menu.',
-    category: 'Branding',
-  },
-  {
-    id: 'analytics-advanced-filters',
-    name: 'Advanced Analytics Filters',
-    price: 59,
-    description: 'Unlock 7-day, 30-day, and Custom Date range filters for your dashboard.',
-    category: 'Analytics',
-  },
-  {
-    id: 'analytics-customer-insights',
-    name: 'Customer Insights Report',
-    price: 59,
-    description: 'Access detailed reports on customer views and repeat visits.',
-    category: 'Analytics',
-  },
-];
-
-const ALL_ACCESS_PRICE = 399;
-
 export default function Pricing() {
   const ref = useRef(null)
   const isInView = useInView(ref, { once: true, margin: '-50px' })
 
+  const {
+    country,
+    supportedCountries,
+    allAccess,
+    modules,
+    billingCycle,
+    setBillingCycle,
+    setSelectedCountryCode
+  } = useGlobalPricing();
+
   const [selectedFeatures, setSelectedFeatures] = useState<Set<string>>(new Set());
   const [isAllAccess, setIsAllAccess] = useState(false);
-  const [isYearly, setIsYearly] = useState(false);
+  const [isCountryDropdownOpen, setIsCountryDropdownOpen] = useState(false);
+
+  const isYearly = billingCycle === 'yearly';
 
   const toggleFeature = (id: string) => {
     if (isAllAccess) setIsAllAccess(false);
@@ -121,16 +73,15 @@ export default function Pricing() {
 
   const { baseTotal, pgFee, gstFee, grandTotal, activeItems } = useMemo(() => {
     let base = 0;
-    const items: Feature[] = [];
-    const multiplier = isYearly ? 10 : 1;
+    const items: typeof modules = [];
 
     if (isAllAccess) {
-      base = ALL_ACCESS_PRICE * multiplier;
+      base = isYearly ? allAccess.yearly_price : allAccess.monthly_price;
     } else {
       selectedFeatures.forEach((id) => {
-        const feature = ADDONS.find(a => a.id === id);
+        const feature = modules.find(a => a.id === id);
         if (feature) {
-          base += feature.price * multiplier;
+          base += isYearly ? feature.yearly_price : feature.monthly_price;
           items.push(feature);
         }
       });
@@ -147,7 +98,7 @@ export default function Pricing() {
       grandTotal: total,
       activeItems: items
     };
-  }, [selectedFeatures, isAllAccess, isYearly]);
+  }, [selectedFeatures, isAllAccess, isYearly, allAccess, modules]);
 
   return (
     <SectionWrapper id="pricing" className="bg-white relative">
@@ -177,16 +128,68 @@ export default function Pricing() {
           </p>
         </motion.div>
 
-        {/* Billing Cycle Toggle */}
+        {/* Country Selector & Billing Cycle Toggle */}
         <motion.div 
           initial={{ opacity: 0, y: 20 }}
           animate={isInView ? { opacity: 1, y: 0 } : {}}
           transition={{ duration: 0.5, delay: 0.1 }}
-          className="flex justify-center mb-6 px-1"
+          className="flex flex-col sm:flex-row items-center justify-center gap-3 mb-6 px-1"
         >
+          {/* Country Selector Dropdown */}
+          <div className="relative">
+            <button
+              onClick={() => setIsCountryDropdownOpen(!isCountryDropdownOpen)}
+              className="bg-slate-100 hover:bg-slate-200/80 border border-slate-200 px-3.5 py-1.5 rounded-full inline-flex items-center gap-2 text-xs sm:text-sm font-bold text-slate-800 transition-all shadow-sm"
+              title="Change Country & Currency"
+            >
+              <CountryFlag code={country.code} size={18} />
+              <span>{country.name}</span>
+              <span className="text-slate-400 font-semibold text-xs">({country.currency} {country.symbol})</span>
+              <ChevronDown size={14} className={cn("text-slate-400 transition-transform duration-200", isCountryDropdownOpen ? "rotate-180" : "")} />
+            </button>
+
+            <AnimatePresence>
+              {isCountryDropdownOpen && (
+                <motion.div
+                  initial={{ opacity: 0, scale: 0.95, y: 5 }}
+                  animate={{ opacity: 1, scale: 1, y: 0 }}
+                  exit={{ opacity: 0, scale: 0.95, y: 5 }}
+                  transition={{ duration: 0.15 }}
+                  className="absolute left-1/2 -translate-x-1/2 mt-2 w-56 bg-white border border-slate-200 rounded-2xl shadow-2xl py-1.5 z-50 overflow-hidden"
+                >
+                  <div className="px-3 py-1.5 text-[10px] font-bold text-slate-400 uppercase tracking-wider border-b border-slate-100">
+                    Select Your Country
+                  </div>
+                  {supportedCountries.map((c) => (
+                    <button
+                      key={c.code}
+                      onClick={() => {
+                        setSelectedCountryCode(c.code);
+                        setIsCountryDropdownOpen(false);
+                      }}
+                      className={cn(
+                        "w-full px-3 py-2 text-left flex items-center justify-between text-xs sm:text-sm font-semibold transition-colors",
+                        country.code === c.code
+                          ? "bg-primary/10 text-primary"
+                          : "text-slate-700 hover:bg-slate-50"
+                      )}
+                    >
+                      <div className="flex items-center gap-2.5">
+                        <CountryFlag code={c.code} size={16} />
+                        <span>{c.name}</span>
+                      </div>
+                      <span className="text-xs text-slate-400 font-mono font-medium">{c.currency} {c.symbol}</span>
+                    </button>
+                  ))}
+                </motion.div>
+              )}
+            </AnimatePresence>
+          </div>
+
+          {/* Billing Cycle Toggle */}
           <div className="bg-slate-100 p-1 rounded-full inline-flex items-center shadow-inner border border-slate-200">
             <button
-              onClick={() => setIsYearly(false)}
+              onClick={() => setBillingCycle('monthly')}
               className={cn(
                 "px-4 py-1.5 rounded-full text-sm font-semibold transition-all duration-300",
                 !isYearly ? "bg-white text-slate-900 shadow-sm" : "text-slate-500 hover:text-slate-700"
@@ -195,7 +198,7 @@ export default function Pricing() {
               Monthly
             </button>
             <button
-              onClick={() => setIsYearly(true)}
+              onClick={() => setBillingCycle('yearly')}
               className={cn(
                 "px-4 py-1.5 rounded-full text-sm font-semibold transition-all duration-300 flex items-center gap-1.5",
                 isYearly ? "bg-white text-slate-900 shadow-sm" : "text-slate-500 hover:text-slate-700"
@@ -263,7 +266,7 @@ export default function Pricing() {
                 <span className="text-[10px] bg-emerald-500 text-white font-black px-2.5 py-0.5 rounded-full shadow-sm shadow-emerald-500/30">100% FREE</span>
               </div>
               <div className="flex items-baseline gap-1 mb-3">
-                <span className="text-3xl font-black text-emerald-600">₹0</span>
+                <span className="text-3xl font-black text-emerald-600">{country.symbol}0</span>
                 <span className="text-xs text-emerald-700/70 font-medium">/ forever</span>
               </div>
               <ul className="space-y-2 border-t border-emerald-200 pt-3">
@@ -314,9 +317,9 @@ export default function Pricing() {
                       <Award size={22} />
                     </div>
                     <div>
-                      <h3 className="text-xl sm:text-2xl font-black text-slate-900">All-Access Bundle</h3>
+                      <h3 className="text-xl sm:text-2xl font-black text-slate-900">{allAccess.name || 'All-Access Bundle'}</h3>
                       <p className="text-xs sm:text-sm text-slate-400 mt-1 max-w-xs">
-                        Complete feature catalog package clearance with no operational volume bounds or rate capping tiers.
+                        {allAccess.description || 'Complete feature catalog package clearance with no operational volume bounds or rate capping tiers.'}
                       </p>
                     </div>
                   </div>
@@ -324,7 +327,9 @@ export default function Pricing() {
                   <div className="relative group self-center sm:self-auto shrink-0">
                     <div className="absolute inset-0 bg-gradient-to-r from-primary to-orange-600 rounded-2xl blur-md opacity-30 group-hover:opacity-60 transition duration-500" />
                     <div className="relative bg-orange-50 px-6 py-4 rounded-2xl border-2 border-primary/50 flex items-baseline gap-1 shadow-xl shadow-primary/20">
-                      <span className="text-4xl font-black bg-gradient-to-r from-primary to-orange-600 bg-clip-text text-transparent">₹{isYearly ? ALL_ACCESS_PRICE * 10 : ALL_ACCESS_PRICE}</span>
+                      <span className="text-4xl font-black bg-gradient-to-r from-primary to-orange-600 bg-clip-text text-transparent">
+                        {country.symbol}{isYearly ? allAccess.yearly_price : allAccess.monthly_price}
+                      </span>
                       <span className="text-xs text-slate-400 font-bold">/{isYearly ? 'yr' : 'mo'}</span>
                     </div>
                   </div>
@@ -333,7 +338,7 @@ export default function Pricing() {
                 <div className="mt-6">
                   <span className="text-[11px] font-bold text-primary uppercase tracking-widest block mb-3">Everything Included:</span>
                   <div className="grid grid-cols-1 sm:grid-cols-2 gap-2.5">
-                    {ADDONS.map((addon) => (
+                    {modules.map((addon) => (
                       <div key={addon.id} className="flex items-center gap-2.5 bg-slate-50 p-3 rounded-xl border border-slate-200">
                         <div className="w-4 h-4 rounded-full bg-emerald-500 text-slate-900 flex items-center justify-center shrink-0 shadow-sm">
                           <Check size={10} strokeWidth={3} />
@@ -354,12 +359,12 @@ export default function Pricing() {
                 
                 <div>
                   {Object.entries(
-                    ADDONS.reduce((acc, feature) => {
+                    modules.reduce((acc, feature) => {
                       const cat = feature.category || 'Other';
                       if (!acc[cat]) acc[cat] = [];
                       acc[cat].push(feature);
                       return acc;
-                    }, {} as Record<string, typeof ADDONS>)
+                    }, {} as Record<string, typeof modules>)
                   ).map(([category, features]) => (
                     <div key={category} className="mb-6 last:mb-0">
                       <h3 className="text-xs font-bold text-slate-400 uppercase tracking-wider mb-3 px-1 border-b border-slate-200 pb-2 flex items-center gap-2">
@@ -369,6 +374,7 @@ export default function Pricing() {
                       <div className="grid grid-cols-1 sm:grid-cols-2 gap-3.5">
                         {features.map((feature) => {
                           const isSelected = selectedFeatures.has(feature.id);
+                          const featurePrice = isYearly ? feature.yearly_price : feature.monthly_price;
                           return (
                             <div 
                               key={feature.id}
@@ -412,7 +418,7 @@ export default function Pricing() {
                                   <HelpCircle size={11} /> Multi-use
                                 </span>
                                 <div className="text-right">
-                                  <span className="font-black text-slate-900 text-sm sm:text-base">₹{isYearly ? feature.price * 10 : feature.price}</span>
+                                  <span className="font-black text-slate-900 text-sm sm:text-base">{country.symbol}{featurePrice}</span>
                                   <span className="text-[10px] text-slate-400 font-bold">/{isYearly ? 'yr' : 'mo'}</span>
                                 </div>
                               </div>
@@ -458,9 +464,9 @@ export default function Pricing() {
 
               {/* Itemized Calculation Summary Pill */}
               <div className="flex items-center gap-1.5 text-[10px] sm:text-xs text-slate-500 font-medium shrink-0 bg-slate-100 px-2.5 sm:px-3 py-1 rounded-lg border border-slate-200">
-                <span>Base: <strong className="text-slate-900">₹{baseTotal.toFixed(2)}</strong></span>
+                <span>Base: <strong className="text-slate-900">{country.symbol}{baseTotal.toFixed(2)}</strong></span>
                 <span>+</span>
-                <span>Payment Gateway: <strong className="text-slate-900">₹{(pgFee + gstFee).toFixed(2)}</strong></span>
+                <span>Payment Gateway: <strong className="text-slate-900">{country.symbol}{(pgFee + gstFee).toFixed(2)}</strong></span>
               </div>
             </div>
 
@@ -469,7 +475,7 @@ export default function Pricing() {
               <div className="min-w-0">
                 <span className="text-[10px] text-slate-400 font-bold uppercase tracking-widest block leading-none">Total Payable Bill</span>
                 <div className="flex items-baseline gap-1 mt-1">
-                  <span className="text-3xl sm:text-4xl font-black text-slate-900 tracking-tight">₹{grandTotal.toFixed(2)}</span>
+                  <span className="text-3xl sm:text-4xl font-black text-slate-900 tracking-tight">{country.symbol}{grandTotal.toFixed(2)}</span>
                   <span className="text-xs sm:text-sm font-bold text-slate-400">/{isYearly ? 'yr' : 'mo'}</span>
                 </div>
               </div>

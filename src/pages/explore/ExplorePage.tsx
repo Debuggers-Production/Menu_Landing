@@ -98,11 +98,17 @@ export function ExplorePage() {
         </div>
 
         <div>
-          <h3 className="text-sm font-bold text-slate-900 uppercase tracking-wider mb-4">Categories</h3>
+          <h3 className="text-sm font-bold text-slate-900 uppercase tracking-wider mb-4">Business Types & Categories</h3>
           <div className="space-y-2">
-            {['Pizza', 'Burger', 'South Indian', 'Chinese', 'Cafe'].map((cat) => (
-              <label key={cat} className="flex items-center gap-2 text-sm text-slate-600">
-                <input type="checkbox" className="rounded text-primary focus:ring-primary/20" />
+            {[
+              'Restaurants, Cafes & Hotels',
+              'Fireworks & Crackers',
+              'Pizza & Burgers',
+              'South Indian & Traditional',
+              'Cafe & Desserts'
+            ].map((cat) => (
+              <label key={cat} className="flex items-center gap-2 text-sm text-slate-600 cursor-pointer hover:text-slate-900">
+                <input type="checkbox" className="rounded text-primary focus:ring-primary/20 cursor-pointer" />
                 {cat}
               </label>
             ))}
@@ -114,10 +120,10 @@ export function ExplorePage() {
       <div className="flex-1 pb-20">
         <div className="mb-6">
           <h1 className="text-3xl font-black text-slate-900 tracking-tight">
-            {category ? `${category} in ` : 'Restaurants in '}
+            {category ? `${category} in ` : 'Stores & Menus in '}
             {city ? <span className="capitalize">{city}</span> : 'Your Area'}
           </h1>
-          <p className="text-slate-500 mt-2">Discover the best food and drinks around you.</p>
+          <p className="text-slate-500 mt-2">Discover the best shops, digital menus, and offers around you.</p>
         </div>
 
         {loading ? (

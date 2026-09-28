@@ -18,18 +18,18 @@ import {
 import SectionWrapper from '../components/SectionWrapper'
 
 const features = [
-  { icon: IoMapOutline, title: 'Global Store Discovery', desc: 'Allow hungry customers to find your restaurant on an interactive map and explore your best deals.', span: 'md:col-span-4 lg:col-span-2', color: 'from-accent to-secondary' },
-  { icon: IoQrCodeOutline, title: 'QR Code Generation', desc: 'Generate unique, scannable QR codes for each table or location instantly.', span: 'md:col-span-2', color: 'from-primary to-secondary' },
-  { icon: MdOutlinePreview, title: 'Live Menu Preview', desc: 'See real-time changes as you build your menu.', span: '', color: 'from-secondary to-accent' },
-  { icon: MdOutlineUpdate, title: 'Unlimited Updates', desc: 'Change prices, items, and categories anytime.', span: '', color: 'from-accent to-primary' },
-  { icon: MdOutlineImage, title: 'Food Image Uploads', desc: 'Beautiful high-res food photography to entice customers.', span: '', color: 'from-primary to-accent' },
-  { icon: IoSearchOutline, title: 'Searchable Menus', desc: 'Customers find their favorites instantly with built-in search.', span: '', color: 'from-secondary to-primary' },
-  { icon: MdOutlineFilterList, title: 'Veg/Non-Veg Filters', desc: 'One-tap dietary filters for a personalized experience.', span: 'md:col-span-2', color: 'from-accent to-secondary' },
-  { icon: MdOutlineWavingHand, title: 'Welcome Messages', desc: 'Greet customers with personalized welcome screens.', span: '', color: 'from-primary to-secondary' },
-  { icon: MdOutlineAnalytics, title: 'Analytics Dashboard', desc: 'Track scans, popular items, and customer behavior.', span: 'md:col-span-2', color: 'from-secondary to-accent' },
-  { icon: IoPhonePortraitOutline, title: 'Mobile Optimized', desc: 'Perfect experience on every screen size.', span: '', color: 'from-accent to-primary' },
-  { icon: IoLanguageOutline, title: 'Multi-Language Support', desc: 'Customers can translate your menu to their native language instantly.', span: 'md:col-span-2', color: 'from-primary to-secondary' },
-  { icon: IoColorPaletteOutline, title: 'Beautiful Themes', desc: 'Choose from stunning templates that match your brand.', span: 'md:col-span-2', color: 'from-secondary to-accent' },
+  { icon: IoMapOutline, title: 'Global Store Discovery', desc: 'Let customers find your business on an interactive map and explore your offerings and best deals.', span: 'md:col-span-4 lg:col-span-2', color: 'from-accent to-secondary' },
+  { icon: IoQrCodeOutline, title: 'QR Code Generation', desc: 'Generate unique, scannable QR codes for tables, counters, or any location instantly.', span: 'md:col-span-2', color: 'from-primary to-secondary' },
+  { icon: MdOutlinePreview, title: 'Live Menu Preview', desc: 'See real-time changes as you build and refine your menu.', span: '', color: 'from-secondary to-accent' },
+  { icon: MdOutlineUpdate, title: 'Unlimited Updates', desc: 'Change prices, items, and categories anytime — zero cost, instant live.', span: '', color: 'from-accent to-primary' },
+  { icon: MdOutlineImage, title: 'Product Image Uploads', desc: 'Beautiful high-res imagery to entice and inform customers.', span: '', color: 'from-primary to-accent' },
+  { icon: IoSearchOutline, title: 'Searchable Menus', desc: 'Customers find what they want instantly with built-in search.', span: '', color: 'from-secondary to-primary' },
+  { icon: MdOutlineFilterList, title: 'Smart Filters', desc: 'One-tap filters like Veg/Non-Veg, Spicy, Gluten-Free for a personalized experience.', span: 'md:col-span-2', color: 'from-accent to-secondary' },
+  { icon: MdOutlineWavingHand, title: 'Welcome Messages', desc: 'Greet customers with personalized branded welcome screens.', span: '', color: 'from-primary to-secondary' },
+  { icon: MdOutlineAnalytics, title: 'Analytics Dashboard', desc: 'Track scans, popular items, peak hours, and customer behavior.', span: 'md:col-span-2', color: 'from-secondary to-accent' },
+  { icon: IoPhonePortraitOutline, title: 'Mobile Optimized', desc: 'Perfect, fast experience on every screen size.', span: '', color: 'from-accent to-primary' },
+  { icon: IoLanguageOutline, title: 'Multi-Language Support', desc: 'Customers can view your menu in their native language instantly.', span: 'md:col-span-2', color: 'from-primary to-secondary' },
+  { icon: IoColorPaletteOutline, title: 'Beautiful Themes', desc: 'Choose from stunning templates that perfectly match your brand identity.', span: 'md:col-span-2', color: 'from-secondary to-accent' },
 ]
 
 export default function Features() {
@@ -63,7 +63,7 @@ export default function Features() {
             transition={{ delay: 0.2 }}
             className="text-lg text-slate-500 max-w-2xl mx-auto"
           >
-            Packed with powerful features to make your restaurant menu digital, beautiful, and effortless.
+            Packed with powerful features to make your menu digital, beautiful, and effortless — for any type of business.
           </motion.p>
         </div>
 

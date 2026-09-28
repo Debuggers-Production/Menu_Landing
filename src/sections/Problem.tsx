@@ -6,16 +6,16 @@ import { MdOutlineQrCode2, MdOutlineUpdate, MdOutlineSentimentSatisfiedAlt } fro
 import SectionWrapper from '../components/SectionWrapper'
 
 const oldMethods = [
-  { icon: HiOutlinePrinter, label: 'Printing Menus', desc: 'Expensive reprints every time prices change' },
-  { icon: HiOutlineCurrencyDollar, label: 'Expensive Updates', desc: 'Hundreds spent on design and printing' },
-  { icon: HiOutlineClock, label: 'Outdated Pricing', desc: 'Old prices confuse customers' },
-  { icon: HiOutlineTrash, label: 'Wasted Paper', desc: 'Not eco-friendly at all' },
+  { icon: HiOutlinePrinter, label: 'Printed Catalogs', desc: 'Expensive reprints every time prices or items change' },
+  { icon: HiOutlineCurrencyDollar, label: 'High Update Costs', desc: 'Hundreds spent on design and printing each revision' },
+  { icon: HiOutlineClock, label: 'Outdated Information', desc: 'Old prices and unavailable items frustrate customers' },
+  { icon: HiOutlineTrash, label: 'Wasteful & Unsustainable', desc: 'Paper menus are bad for the environment' },
 ]
 
 const newMethods = [
-  { icon: MdOutlineQrCode2, label: 'QR Menus', desc: 'Instant access from any smartphone' },
-  { icon: MdOutlineUpdate, label: 'Instant Updates', desc: 'Change prices and items in seconds' },
-  { icon: MdOutlineSentimentSatisfiedAlt, label: 'Better Experience', desc: 'Modern, searchable, beautiful menus' },
+  { icon: MdOutlineQrCode2, label: 'QR Digital Menus', desc: 'Instant access from any smartphone — no app needed' },
+  { icon: MdOutlineUpdate, label: 'Instant Updates', desc: 'Change prices, items, and availability in seconds' },
+  { icon: MdOutlineSentimentSatisfiedAlt, label: 'Better Experience', desc: 'Modern, searchable, beautiful menus for every industry' },
 ]
 
 export default function Problem() {
@@ -51,7 +51,7 @@ export default function Problem() {
             transition={{ delay: 0.2 }}
             className="text-lg text-slate-500 max-w-2xl mx-auto"
           >
-            Restaurants waste thousands on printed menus that become outdated the moment prices change.
+            Any business with a menu or catalog wastes money on printed copies that become outdated the moment anything changes.
           </motion.p>
         </div>
 
@@ -135,7 +135,7 @@ export default function Problem() {
                 className="mt-6 p-4 rounded-xl bg-gradient-to-r from-primary/10 to-secondary/5 border border-primary/15"
               >
                 <p className="text-sm text-primary font-medium">
-                  ✨ Save 90% on menu costs. Update instantly. Delight customers.
+                  ✨ Save 90% on menu costs. Update instantly. Delight every customer.
                 </p>
               </motion.div>
             </div>

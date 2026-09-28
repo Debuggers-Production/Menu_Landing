@@ -1,15 +1,15 @@
 import { useState, useEffect } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
-import { IoStarSharp, IoPersonOutline, IoRestaurantOutline, IoCafeOutline, IoFastFoodOutline } from 'react-icons/io5'
+import { IoStarSharp, IoPersonOutline, IoStorefrontOutline, IoCafeOutline, IoBusinessOutline } from 'react-icons/io5'
 import SectionWrapper from '../components/SectionWrapper'
 
 const testimonials = [
   {
     name: 'Priya Sharma',
-    role: 'Owner, Spice Garden',
+    role: 'Owner, Spice Garden Restaurant',
     text: 'Menukit has completely transformed how we serve our customers. No more reprinting menus every time we change a price. Our customers love the modern experience!',
     rating: 5,
-    avatar: <IoRestaurantOutline />,
+    avatar: <IoStorefrontOutline />,
   },
   {
     name: 'Rahul Mehta',
@@ -21,23 +21,23 @@ const testimonials = [
   {
     name: 'Anita Patel',
     role: 'Owner, Green Bowl Café',
-    text: "The veg/non-veg filter is a game changer for our diverse menu. Customers can instantly find what they're looking for. Best investment we've made this year!",
+    text: "The smart filters are a game changer for our diverse menu. Customers can instantly find what they're looking for. Best investment we've made this year!",
     rating: 5,
     avatar: <IoCafeOutline />,
   },
   {
     name: 'Vikram Singh',
-    role: 'Director, Royal Feast',
-    text: 'The themes are stunning and our restaurant now feels truly premium. Guests often compliment the beautiful menu design. Highly recommend to any restaurant owner!',
+    role: 'Event Manager, Royal Banquets',
+    text: 'We use Menukit for all our event catering menus. Updating the menu between event days is instant and our clients love the premium digital experience.',
     rating: 5,
     avatar: <IoPersonOutline />,
   },
   {
     name: 'Kavitha Nair',
-    role: 'Founder, Chai & More',
-    text: "Being able to update our seasonal specials instantly without any printing costs is incredible. Menukit pays for itself within the first month!",
+    role: 'Founder, Chai & More (Food Stall)',
+    text: "Even as a small food stall, Menukit makes us look completely professional. Customers scan our QR and place their order without us needing any printed materials!",
     rating: 5,
-    avatar: <IoFastFoodOutline />,
+    avatar: <IoBusinessOutline />,
   },
 ]
 
@@ -72,7 +72,7 @@ export default function Testimonials() {
             className="text-4xl md:text-5xl lg:text-6xl font-display font-bold mb-6"
           >
             Loved by{' '}
-            <span className="gradient-text">Restaurants</span>
+            <span className="gradient-text">Businesses Everywhere</span>
           </motion.h2>
         </div>
 

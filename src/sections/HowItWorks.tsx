@@ -6,11 +6,11 @@ import { MdOutlineColorLens, MdOutlinePhoneIphone, MdOutlineRocketLaunch } from 
 import SectionWrapper from '../components/SectionWrapper'
 
 const steps = [
-  { icon: IoStorefrontOutline, title: 'Create Shop', desc: 'Set up your restaurant profile in seconds', color: 'from-primary to-secondary' },
-  { icon: BiFoodMenu, title: 'Add Menu', desc: 'Add your dishes, prices, and categories', color: 'from-secondary to-accent' },
-  { icon: MdOutlineColorLens, title: 'Customize Design', desc: 'Choose themes and branding that match your vibe', color: 'from-accent to-primary' },
-  { icon: IoQrCodeOutline, title: 'Generate QR', desc: 'Get a unique QR code for your restaurant', color: 'from-primary to-accent' },
-  { icon: MdOutlinePhoneIphone, title: 'Customers Scan', desc: 'Guests scan the QR code at their table', color: 'from-secondary to-primary' },
+  { icon: IoStorefrontOutline, title: 'Create Your Shop', desc: 'Set up your business profile in seconds — any industry welcome', color: 'from-primary to-secondary' },
+  { icon: BiFoodMenu, title: 'Build Your Menu', desc: 'Add items, prices, categories, and descriptions', color: 'from-secondary to-accent' },
+  { icon: MdOutlineColorLens, title: 'Customize Design', desc: 'Choose themes and branding that match your identity', color: 'from-accent to-primary' },
+  { icon: IoQrCodeOutline, title: 'Generate QR Code', desc: 'Get a unique QR code for your location or counter', color: 'from-primary to-accent' },
+  { icon: MdOutlinePhoneIphone, title: 'Customers Scan', desc: 'Anyone scans the QR code to instantly view your menu', color: 'from-secondary to-primary' },
   { icon: MdOutlineRocketLaunch, title: 'Menu Opens Instantly', desc: 'Beautiful digital menu loads in under 2 seconds', color: 'from-accent to-secondary' },
 ]
 
@@ -39,7 +39,7 @@ export default function HowItWorks() {
             className="text-4xl md:text-5xl lg:text-6xl font-display font-bold mb-6"
           >
             From Setup to{' '}
-            <span className="gradient-text">Serving</span>
+            <span className="gradient-text">Live</span>
           </motion.h2>
           <motion.p
             initial={{ opacity: 0, y: 20 }}
@@ -48,7 +48,7 @@ export default function HowItWorks() {
             transition={{ delay: 0.2 }}
             className="text-lg text-slate-500 max-w-2xl mx-auto"
           >
-            Get your digital menu running in just 6 simple steps. It takes less than 5 minutes.
+            Get your digital menu live in just 6 simple steps. Works for any business. Takes less than 5 minutes.
           </motion.p>
         </div>
 

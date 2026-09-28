@@ -41,7 +41,7 @@ export default function Footer() {
               </span>
             </a>
             <p className="text-sm text-slate-500 leading-relaxed mb-6 max-w-xs">
-              Transform your restaurant menu into a beautiful digital experience. QR-powered, instant updates, zero hassle.
+              Create a beautiful QR-powered digital menu for any business. Instant updates, zero printing, zero hassle.
             </p>
             <div className="flex gap-3">
               {socialLinks.map((social) => (

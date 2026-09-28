@@ -3,17 +3,17 @@ import { APP_CONFIG } from '../config'
 import { motion } from 'framer-motion'
 import { gsap } from 'gsap'
 import { HiOutlinePlay } from 'react-icons/hi'
-import { IoQrCodeOutline, IoRestaurantOutline, IoFastFoodOutline } from 'react-icons/io5'
+import { IoQrCodeOutline, IoStorefrontOutline } from 'react-icons/io5'
 import { BiFoodMenu } from 'react-icons/bi'
-import { MdOutlineDeliveryDining } from 'react-icons/md'
+import { MdOutlineLocalCafe, MdOutlineTableBar, MdOutlineDeliveryDining } from 'react-icons/md'
 import heroMerchantDesktop from '../assets/hero-merchant-desktop.png'
 import heroCustomerMobile from '../assets/hero-customer-mobile.jpg'
 
 const floatingCards = [
   { icon: IoQrCodeOutline, label: 'QR Menu', color: 'from-primary to-secondary', x: '8%', y: '20%', delay: 0 },
-  { icon: IoRestaurantOutline, label: 'Dine In', color: 'from-secondary to-accent', x: '85%', y: '25%', delay: 0.3 },
-  { icon: IoFastFoodOutline, label: 'Burger', color: 'from-accent to-primary', x: '12%', y: '70%', delay: 0.6 },
-  { icon: BiFoodMenu, label: 'Menu', color: 'from-primary to-accent', x: '88%', y: '65%', delay: 0.9 },
+  { icon: MdOutlineLocalCafe, label: 'Café', color: 'from-secondary to-accent', x: '85%', y: '25%', delay: 0.3 },
+  { icon: MdOutlineTableBar, label: 'Events', color: 'from-accent to-primary', x: '12%', y: '70%', delay: 0.6 },
+  { icon: BiFoodMenu, label: 'Any Menu', color: 'from-primary to-accent', x: '88%', y: '65%', delay: 0.9 },
   { icon: MdOutlineDeliveryDining, label: 'Delivery', color: 'from-secondary to-primary', x: '75%', y: '85%', delay: 1.2 },
 ]
 
@@ -24,17 +24,16 @@ export default function Hero() {
   useEffect(() => {
     if (!headlineRef.current) return
 
-    // Animate headline words
+    // Animate headline words — simple fade+slide, no rotateX (avoids 3D clipping)
     const words = headlineRef.current.querySelectorAll('.word')
     gsap.fromTo(
       words,
-      { y: 60, opacity: 0, rotateX: -30 },
+      { y: 40, opacity: 0 },
       {
         y: 0,
         opacity: 1,
-        rotateX: 0,
-        duration: 0.8,
-        stagger: 0.06,
+        duration: 0.7,
+        stagger: 0.07,
         ease: 'power3.out',
         delay: 0.2,
       }
@@ -44,15 +43,16 @@ export default function Hero() {
   return (
     <div
       ref={containerRef}
-      className="relative min-h-screen flex items-center justify-center overflow-hidden"
+      className="relative min-h-screen flex items-center justify-center"
     >
-      {/* Animated Mesh Background */}
-      <div className="absolute inset-0 mesh-gradient" />
-      <div className="absolute inset-0 bg-grid opacity-40" />
-
-      {/* Gradient Orbs */}
-      <div className="absolute top-1/4 left-1/4 w-[500px] h-[500px] rounded-full bg-primary/10 blur-[120px] animate-orb1" />
-      <div className="absolute bottom-1/3 right-1/4 w-[400px] h-[400px] rounded-full bg-secondary/8 blur-[100px] animate-orb2" />
+      {/* Animated Mesh Background — overflow-hidden is scoped HERE only */}
+      <div className="absolute inset-0 overflow-hidden">
+        <div className="absolute inset-0 mesh-gradient" />
+        <div className="absolute inset-0 bg-grid opacity-40" />
+        {/* Gradient Orbs */}
+        <div className="absolute top-1/4 left-1/4 w-[500px] h-[500px] rounded-full bg-primary/10 blur-[120px] animate-orb1" />
+        <div className="absolute bottom-1/3 right-1/4 w-[400px] h-[400px] rounded-full bg-secondary/8 blur-[100px] animate-orb2" />
+      </div>
 
       {/* Floating Cards */}
       <div className="absolute inset-0 hidden lg:block">
@@ -83,19 +83,17 @@ export default function Hero() {
         {/* Headline */}
         <h1
           ref={headlineRef}
-          className="text-5xl sm:text-6xl md:text-7xl lg:text-8xl font-display font-bold leading-[0.95] tracking-tight mb-8"
-          style={{ perspective: '800px' }}
+          className="text-5xl sm:text-6xl md:text-7xl lg:text-8xl font-display font-bold tracking-tight mb-8"
+          style={{ lineHeight: 1.15 }}
         >
-          <span className="word inline-block">Turn </span>
-          <span className="word inline-block">Every </span>
-          <span className="word inline-block">Table </span>
-          <br className="hidden sm:block" />
-          <span className="word inline-block">Into </span>
-          <span className="word inline-block">A </span>
-          <span className="word inline-block gradient-text">Digital </span>
-          <span className="word inline-block gradient-text">Menu </span>
-          <br className="hidden sm:block" />
-          <span className="word inline-block gradient-text">Experience</span>
+          <span className="flex flex-wrap justify-center gap-x-[0.22em] gap-y-2">
+            <span className="word">One</span>
+            <span className="word">Menu.</span>
+            <span className="word">Every</span>
+            <span className="word">Industry.</span>
+            <span className="word gradient-text">Zero</span>
+            <span className="word gradient-text">Printing.</span>
+          </span>
         </h1>
 
         {/* Subheadline */}
@@ -105,9 +103,9 @@ export default function Hero() {
           transition={{ delay: 1.2, duration: 0.8 }}
           className="text-lg md:text-xl text-slate-500 max-w-2xl mx-auto mb-12 leading-relaxed"
         >
-          Create beautiful QR-powered restaurant menus in minutes.{' '}
+          Create a beautiful QR-powered digital menu for <strong className="text-slate-700 font-semibold">any business</strong> — restaurants, cafés, food stalls, events, hotels, and more.{' '}
           <span className="text-slate-900/70">No printing. No app downloads.</span>{' '}
-          Update your menu anytime.
+          Update anytime, instantly.
         </motion.p>
 
         {/* CTA Buttons */}
@@ -121,7 +119,7 @@ export default function Hero() {
             Start Free
           </a>
           <a href={`${APP_CONFIG.MAIN_APP_URL}/discover`} className="outline-btn px-8 py-4 text-lg font-semibold min-w-[200px] flex items-center justify-center gap-2" style={{ borderColor: 'rgba(249,115,22,0.5)', color: '#f97316' }}>
-            <IoRestaurantOutline className="text-xl" />
+            <IoStorefrontOutline className="text-xl" />
             Explore Shops
           </a>
           <button className="outline-btn px-8 py-4 text-lg font-semibold min-w-[200px] flex items-center justify-center gap-2">

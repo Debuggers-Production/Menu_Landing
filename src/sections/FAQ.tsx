@@ -17,8 +17,8 @@ const faqs = [
     answer: 'Absolutely! You can update your menu items, prices, descriptions, images, and categories anytime from your dashboard. Changes are reflected instantly — your customers always see the latest version.',
   },
   {
-    question: 'Can I upload food images?',
-    answer: 'Yes! You can upload high-quality images for each menu item. Beautiful food photography significantly increases orders. We optimize images automatically for fast loading on all devices.',
+    question: 'Can I upload product images?',
+    answer: 'Yes! You can upload high-quality images for each menu item. Beautiful product photography significantly increases orders. We optimize images automatically for fast loading on all devices.',
   },
   {
     question: 'How much does it cost?',

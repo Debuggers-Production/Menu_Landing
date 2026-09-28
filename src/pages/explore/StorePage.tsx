@@ -245,7 +245,9 @@ export function StorePage() {
                         ) : (
                           <div className="w-full h-full flex items-center justify-center text-slate-300 bg-slate-50 font-bold text-xl">{item.name.charAt(0)}</div>
                         )}
-                        <div className={`absolute top-2 right-2 w-3 h-3 rounded-full border border-white shadow-sm ${item.is_veg ? 'bg-green-500' : 'bg-red-500'}`}></div>
+                        {shop?.category !== 'fireworks_crackers' && (
+                          <div className={`absolute top-2 right-2 w-3 h-3 rounded-full border border-white shadow-sm ${item.is_veg ? 'bg-green-500' : 'bg-red-500'}`}></div>
+                        )}
                       </div>
                       <div className="flex flex-col justify-center">
                         <h4 className="font-bold text-slate-900 group-hover:text-primary transition-colors text-lg line-clamp-1">{item.name}</h4>
@@ -264,13 +266,19 @@ export function StorePage() {
             {/* Primary Order CTA */}
             <div className="bg-slate-900 rounded-3xl p-8 shadow-2xl text-slate-900 relative overflow-hidden group">
               <div className="absolute top-0 right-0 w-64 h-64 bg-primary rounded-full blur-3xl opacity-20 group-hover:opacity-30 transition-opacity translate-x-20 -translate-y-20"></div>
-              <h3 className="text-2xl font-black mb-2 relative z-10">Hungry?</h3>
-              <p className="text-slate-300 text-sm mb-8 relative z-10 leading-relaxed">Browse the full digital menu, customize your items, and order directly online.</p>
+              <h3 className="text-2xl font-black mb-2 relative z-10">
+                {shop.category === 'fireworks_crackers' ? 'Ready to Order?' : 'Hungry?'}
+              </h3>
+              <p className="text-slate-300 text-sm mb-8 relative z-10 leading-relaxed">
+                {shop.category === 'fireworks_crackers' 
+                  ? 'Browse the complete product catalog, select items, and place your order directly online.'
+                  : 'Browse the full digital menu, customize your items, and order directly online.'}
+              </p>
               <a 
                 href={orderLink}
                 className="relative z-10 w-full flex items-center justify-center gap-2 bg-primary hover:bg-orange-500 text-slate-900 font-bold py-4 px-6 rounded-2xl transition-all hover:scale-[1.02] active:scale-[0.98] shadow-lg shadow-primary/25"
               >
-                Explore their Menu <ExternalLink size={18} />
+                {shop.category === 'fireworks_crackers' ? 'Explore Product Catalog' : 'Explore their Menu'} <ExternalLink size={18} />
               </a>
             </div>
 

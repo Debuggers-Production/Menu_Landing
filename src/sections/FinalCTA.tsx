@@ -61,13 +61,13 @@ export default function FinalCTA() {
           </motion.div>
 
           <h2 className="text-4xl md:text-5xl lg:text-7xl font-display font-bold mb-6 leading-tight">
-            Ready To Modernize
+            Ready To Go
             <br />
-            <span className="gradient-text">Your Restaurant Menu?</span>
+            <span className="gradient-text">Fully Digital?</span>
           </h2>
 
           <p className="text-lg md:text-xl text-slate-500 max-w-2xl mx-auto mb-12 leading-relaxed">
-            Join thousands of restaurants already using MenuKit. Set up takes less than 5 minutes and it's completely free to start.
+            Join thousands of businesses already using MenuKit. Set up takes less than 5 minutes and it's completely free to start.
           </p>
 
           <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
